@@ -46,3 +46,9 @@ class Maze:
         20 % chance to do a random action.
         '''
         pass
+    def move(self, state, action):
+        '''
+        Method to determine the result of a move in the maze.
+        It returns next_state, reward, won
+        '''
+        # (next_state,reward,won) = maze.move(state,action)
