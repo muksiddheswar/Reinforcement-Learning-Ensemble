@@ -48,6 +48,27 @@ class Maze:
         Method to generate an initial 9x6 maze with dynamically allocated obstacles and a dynamically allocated goal.
         '''
         pass
+    def determineAction(self, intendedAction):
+        '''
+        Method that determines the action.
+        There is a probabilistic chance of 80 % to return the intended action.
+        20 % chance to do a random action.
+        '''
+        possibleActions= ["up","down", "right", "left"]
+        
+        # Generate random number between 0 and 1
+        rand = np.random.random()
+        
+        # Check if the intended action is valid
+        if intendedAction not in possibleActions:
+            print("ERROR. You cal only choose the actions: ", possibleActions)
+        # If random number is smaller than 0.2, return random action
+        elif rand<=0.2:
+            return np.random.choice(possibleActions)
+        # return intended action
+        else:
+            return intendedAction
+            
     def generateRewards(self, state, action):
         '''
         Method that determines reward based on the state and action.
@@ -56,13 +77,6 @@ class Maze:
     def generateNextState(self, state, action):
         '''
         Method that determines how a current state will transition into a new state, based on a given action.
-        '''
-        pass
-    def determineAction(self, intendedAction):
-        '''
-        Method that determines the action.
-        There is a probabilistic chance of 80 % to return the intended action.
-        20 % chance to do a random action.
         '''
         pass
     def move(self, state, action):
