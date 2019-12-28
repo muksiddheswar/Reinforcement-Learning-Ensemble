@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import numpy as np
+
 class Maze:
     def __init__(self):
         pass
@@ -8,7 +10,24 @@ class Maze:
         '''
         Method to generate an initial 9x6 Sutton's Dyna maze.
         '''
-        pass
+        # initialize empty maze
+        maze=np.empty([6, 9], dtype=str)
+
+        # Add Start
+        maze[2,0]="S"
+
+        # Add Goal
+        maze[0,8]="G"
+
+        # Add Walls
+        maze[1:4,2]="W"
+        maze[0:3, 7]="W"
+        maze[4,5]="W"
+        
+        # initialize maze 
+        self.maze= maze
+        
+        
     def initPartObservMaze(self):
         '''
         Method to generate an initial 9x6 partially observable maze.
