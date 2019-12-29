@@ -54,21 +54,21 @@ class RL_model:
 		alpha = self.parameters[2,0]
 		beta = self.parameters[2,1]
 		gamma = self.parameters[2,2]
-		self.v_AC[state] += beta*(reward+gamma*A.v_AC[next_state]-A.v_AC[state])
+		self.v_AC[state] += beta*(reward+gamma*self.v_AC[next_state]-self.v_AC[state])
 		self.p_AC[state,action] += alpha*(reward+gamma*self.v_AC[next_state]-self.v_AC[state])
 
-	def QC_update(self,state,action,next_state,reward):
+	def QV_update(self,state,action,next_state,reward):
 		alpha = self.parameters[3,0]
 		beta = self.parameters[3,1]
 		gamma = self.parameters[3,2]
-		self.v_QC[state] += beta*(reward+gamma*A.v_QC[next_state]-A.v_QC[state])
-		self.q_QV[state,action] += alpha*(reward+gamma*self.v_QC[next_state]-self.q_QV[state,action])
+		self.v_QV[state] += beta*(reward+gamma*self.v_QV[next_state]-self.v_QV[state])
+		self.q_QV[state,action] += alpha*(reward+gamma*self.v_QV[next_state]-self.q_QV[state,action])
 
 	def ACLA_update(self,state,action,next_state,reward):
 		alpha = self.parameters[4,0]
 		beta = self.parameters[4,1]
 		gamma = self.parameters[4,2]
-		delta = reward+gamma*A.v_ACLA[next_state]-A.v_ACLA[state]
+		delta = reward+gamma*self.v_ACLA[next_state]-self.v_ACLA[state]
 		self.v_ACLA[state] += beta*delta
 		if(delta >= 0):
 			for i in range(N_actions):
@@ -77,7 +77,7 @@ class RL_model:
 				else:
 					self.p_ACLA[state,i] += alpha*(0-self.p_ACLA[state,i])
 				if(self.p_ACLA[state,action]>1): self.p_ACLA[state,action] = 1
-				elif(elf.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
+				elif(self.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
 		else:
 			normalisation = np.sum(self.p_ACLA[state,:])-self.p_ACLA[state,action]
 			for i in range(N_actions):
@@ -87,10 +87,10 @@ class RL_model:
 					if(normalisation <= 0):
 						self.p_ACLA[state,i] =  1.0/(self.N_actions-1)
 					else:
-						self.p_ACLA[state,i] += alpha*self.p_ACLA[state,i]((1.0/normalisation)-1)
+						self.p_ACLA[state,i] += alpha*self.p_ACLA[state,i]*((1.0/normalisation)-1)
 
 				if(self.p_ACLA[state,action]>1): self.p_ACLA[state,action] = 1
-				elif(elf.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
+				elif(self.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
 
 	def softmax_selection (self,weight,action_selection):
 		'''Returns Boltzamann distribution of preferences q_estimate and temperature t'''
@@ -130,7 +130,7 @@ maze_1_parameters = np.array([[0.2,-1,0.9,1],[0.2,-1,0.9,1],[0.1,0.2,0.95,1],[0.
 N_actions = 4
 N_states = 54
 max_it = 1000
-action_selection = 'QL'
+action_selection = 'ACLA'
 number_episodes = 1000
 
 simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,maze_1_parameters)
