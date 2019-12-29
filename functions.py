@@ -104,33 +104,43 @@ def simulation_1_epsiode(maze,action_selection,A,s_0,max_it = 1000):
 	if(not action_selection in A.list_algorithms): raise('action_selection is not valid')
 	Total_reward = 0
 	state = s_0
-	list_states = []
+	list_position = []
 	for i in range(max_it):
 		weights = A.get_weights_for_boltzmann(state,action_selection)
 		prob = A.softmax_selection(weights,action_selection)
 		action = np.random.choice(A.N_actions,p=prob)
 		(next_state,reward,won) = maze.move(action)
-		list_states.append(maze.position)
+		list_position.append(maze.position)
 		Total_reward += reward
 		A.update(state,action,next_state,reward,action_selection)
 		state = next_state
 		if(won): break
-	return(Total_reward,list_states,A)
+	return(Total_reward/(i+1),list_position,A)
 
-def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,input_parameters):
+def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,input_parameters,interval_reward_storage):
 	maze = Maze()
 	A = RL_model(N_states,N_actions,input_parameters)
+	cum_reward = 0
+	final_reward = 0
 	for episode in range(number_episodes):
 		maze.initSmallMaze()
 		s_0 = maze.get_position_index()
-		(Total_reward,list_states,A) = simulation_1_epsiode(maze,action_selection,A,s_0,max_it)
-		print(Total_reward)
+		(average_reward,list_position,A) = simulation_1_epsiode(maze,action_selection,A,s_0,max_it)
+		if((episode+1)%interval_reward_storage ==0):
+			cum_reward += average_reward
+		if(episode>=number_episodes-interval_reward_storage):
+			final_reward +=average_reward
+
+	final_reward /= interval_reward_storage
+	print(cum_reward,final_reward)
+	return(cum_reward,final_reward)
 
 maze_1_parameters = np.array([[0.2,-1,0.9,1],[0.2,-1,0.9,1],[0.1,0.2,0.95,1],[0.2,0.2,0.9,1],[0.005,0.1,0.99,9]])
 N_actions = 4
 N_states = 54
 max_it = 1000
-action_selection = 'ACLA'
-number_episodes = 1000
+action_selection = 'AC'
+number_episodes = 50000
+interval_reward_storage = 2500
 
-simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,maze_1_parameters)
+simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,maze_1_parameters,interval_reward_storage)
