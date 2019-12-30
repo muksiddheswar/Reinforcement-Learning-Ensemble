@@ -48,7 +48,9 @@ class RL_model:
 	def SARSA_update(self,state,action,next_state,reward):
 		alpha = self.parameters[1,0]
 		gamma = self.parameters[1,2]
-		self.q_SARSA[state,action] += alpha*(reward+gamma*self.q_SARSA[next_state,action] - self.q_SARSA[state,action])
+		prob = self.softmax_selection(self.get_weights_for_boltzmann(next_state,'SARSA'),'SARSA')
+		next_action = np.random.choice(self.N_actions,p=prob)
+		self.q_SARSA[state,action] += alpha*(reward+gamma*self.q_SARSA[next_state,next_action] - self.q_SARSA[state,action])
 
 	def AC_update(self,state,action,next_state,reward):
 		alpha = self.parameters[2,0]
@@ -139,7 +141,7 @@ maze_1_parameters = np.array([[0.2,-1,0.9,1],[0.2,-1,0.9,1],[0.1,0.2,0.95,1],[0.
 N_actions = 4
 N_states = 54
 max_it = 1000
-action_selection = 'AC'
+action_selection = 'SARSA'
 number_episodes = 50000
 interval_reward_storage = 2500
 
