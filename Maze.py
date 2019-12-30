@@ -5,7 +5,6 @@ class Maze:
     def __init__(self):
         self.possibleActions = ["up","down", "right", "left"]
     
-    
     def initSmallMaze(self):    
         '''
         Method to generate an initial 9x6 Sutton's Dyna maze.

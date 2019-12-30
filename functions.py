@@ -145,3 +145,4 @@ number_episodes = 50000
 interval_reward_storage = 2500
 
 simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,maze_1_parameters,interval_reward_storage)
+
