@@ -121,7 +121,7 @@ class Maze:
             solvable_maze=self.testMaze()
     def initDynGoalMaze(self):
         def get_state():
-            pass
+            return self.getPositionArray(), self.getGoalArray()
         
         self.get_state = get_state
         
@@ -170,6 +170,13 @@ class Maze:
         positionArray= [False]*self.maze.size
         positionArray[index]=True
         return positionArray
+    
+    def getGoalArray(self):
+        cols = len(self.maze[0])
+        index = self.coordinates2index(self.goal, cols)
+        goalArray= [False]*self.maze.size
+        goalArray[index]=True
+        return goalArray
     
     def getWallIndexArray(self):
         wall_indices = list()
