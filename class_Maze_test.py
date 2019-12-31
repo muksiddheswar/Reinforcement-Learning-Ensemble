@@ -147,6 +147,8 @@ class Maze:
         self.goal = self.index2coordinates(goal_index, cols)
         self.generateMaze()
         
+    def initGenMaze(self):
+        pass
     
     def generateMaze(self):
         maze = np.empty([6, 9], dtype=str) 
