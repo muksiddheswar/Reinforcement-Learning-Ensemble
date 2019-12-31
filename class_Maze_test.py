@@ -99,8 +99,12 @@ class Maze:
         self.get_state = get_state
         
         solvable_maze = False
-        repeats=0
+        #repeats=0
         while not solvable_maze:
+            #if repeats > 0:
+            #    print(repeats)
+            #    print(self.maze)
+            #repeats+=1
             rows = 6
             cols = 9
             indices_n = rows*cols
@@ -119,11 +123,9 @@ class Maze:
             for wi in wall_indices:
                 self.walls.append(self.index2coordinates(wi, cols))
             self.generateMaze()
-            print(self.maze)
+            
             solvable_maze=self.testMaze()
-            if repeats > 0:
-                print(repeats)
-            repeats+=1
+            
     def initDynGoalMaze(self):
         def get_state():
             return np.append(self.getPositionArray(), self.getGoalArray())
@@ -154,7 +156,7 @@ class Maze:
         
     def initGenMaze(self):
         def get_state():
-            pass
+            return np.array(self.getPositionArray()+ self.getGoalArray()+ self.getWallIndexArray())
         
         self.get_state = get_state
         
@@ -168,8 +170,13 @@ class Maze:
         self.goal = self.index2coordinates(goal_index, cols)
         
         solvable_maze = False
-        repeats=0
+        #repeats=0
         while not solvable_maze:
+            #if repeats > 0:
+            #    print(self.maze)
+            #    print(repeats)   
+            #repeats+=1
+            
             indices_n = rows*cols
             obstacles_n = np.random.randint(4, high=9)
             
@@ -183,11 +190,8 @@ class Maze:
             for wi in wall_indices:
                 self.walls.append(self.index2coordinates(wi, cols))
             self.generateMaze()
-            print(self.maze)
+            
             solvable_maze=self.testMaze()
-            if repeats > 0:
-                print(repeats)   
-            repeats+=1
         
     
     def generateMaze(self):
