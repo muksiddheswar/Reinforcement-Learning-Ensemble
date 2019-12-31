@@ -8,7 +8,8 @@ class Maze:
         self.get_state = None
         self.maze = None
         self.position = None
-        self.wall_indices=None
+        self.walls=None
+        self.goal = None
         self.possibleActions= ["up","down", "right", "left"] #Always true
         
     def initSmallMaze(self):    
@@ -18,26 +19,21 @@ class Maze:
         def get_position_index():
             return(self.position[0]*self.maze.shape[1] + self.position[1])
         
-        # Assign self.get_state function
-        self.get_state = get_position_index 
+        self.get_state=get_position_index
         
-        # initialize empty maze
-        maze=np.empty([6, 9], dtype=str) 
-
-        # Add start
         self.position = [2,0]
-        maze[self.position[0],self.position[1]]="S"
+        self.goal = [0,8]
+        self.walls = [
+                (1,2),
+                (2,2),
+                (3,2),
+                (0,7),
+                (1,7),
+                (2,7),
+                (4,5)
+                ]
         
-        # Add Goal
-        maze[0,8]="G" 
-
-        # Add Walls
-        maze[1:4,2]="W"
-        maze[0:3, 7]="W"
-        maze[4,5]="W"
-        
-        # initialize maze 
-        self.maze= maze
+        self.generateMaze()
         
     def initPartObsMaze(self):
         '''
@@ -80,74 +76,81 @@ class Maze:
                         state.append(0)
             return state
                         
-            
-        
-        # Assign self.get_state function
         self.get_state = get_walls 
         
-        # initialize empty maze
-        maze=np.empty([6, 9], dtype=str) 
-        
-        # Add start
         self.position = [2,0]
-        maze[self.position[0],self.position[1]]="S"
+        self.goal = [0,8]
+        self.walls = [
+                (1,2),
+                (2,2),
+                (3,2),
+                (0,7),
+                (1,7),
+                (2,7),
+                (4,5)
+                ]
         
-        # Add Goal
-        maze[0,8]="G" 
-
-        # Add Walls
-        maze[1:4,2]="W"
-        maze[0:3, 7]="W"
-        maze[4,5]="W"
-        
-        # initialize maze 
-        self.maze= maze
+        self.generateMaze()
     
     def initDynObstacMaze(self):
         def get_state():
             return self.getPositionArray(), self.getWallIndexArray()
+        
         self.get_state = get_state
+        
         solvable_maze = False
         while not solvable_maze:
             rows = 6
             cols = 9
-            maze=np.empty([rows, cols], dtype=str)
             indices_n = rows*cols
             obstacles_n = np.random.randint(4, high=9)
-            possible_position = list(range(indices_n))
             
-            # Add start to maze
             self.position= [2,0]
+            self.goal = [0, 8]
+            
+            possible_position = list(range(indices_n))
             start_index = self.coordinates2index(self.position, cols)
-            maze[self.position[0],self.position[1]]="S"
-            
-            
-            # Add Goal to maze
-            goal_coordinates = [0, 8]
-            goal_index = self.coordinates2index(goal_coordinates, cols)
-            maze[goal_coordinates[0],goal_coordinates[1]]="G"
-            
-            # Add walls to maze
+            goal_index = self.coordinates2index(self.goal, cols)
             for index in [start_index, goal_index]:
                 possible_position.remove(index)
-            self.wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
-            for wi in self.wall_indices:
-                coordinates = self.index2coordinates(wi, cols)
-                i = coordinates[0]
-                j = coordinates[1]
-                maze[i,j]="W"
-            self.maze= maze
+            wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
+            self.walls = list()
+            for wi in wall_indices:
+                self.walls.append(self.index2coordinates(wi, cols))
+            self.generateMaze()
             solvable_maze=self.testMaze()
-            
+    def initDynGoalMaze(self):
+        pass
+    
+    def generateMaze(self):
+        maze = np.empty([6, 9], dtype=str) 
+        
+        for i,j in self.walls:
+            maze[i,j]="W"
+        
+        i = self.position[0]
+        j = self.position[1]
+        maze[i,j]="S"
+        
+        i = self.goal[0]
+        j = self.goal[1]
+        maze[i,j]="G"
+                        
+        self.maze = maze
+                
     def getPositionArray(self):
         cols = len(self.maze[0])
         index = self.coordinates2index(self.position, cols)
         positionArray= [False]*self.maze.size
         positionArray[index]=True
         return positionArray
+    
     def getWallIndexArray(self):
+        wall_indices = list()
+        for coordinate in self.walls:
+            wall_indices.append(self.coordinates2index(coordinate, len(self.maze[0])))
         wallIndexArray= [False]*self.maze.size
-        for wallIndex in self.wall_indices:
+        for wallIndex in wall_indices:
             wallIndexArray[wallIndex]=True
         return wallIndexArray
         
