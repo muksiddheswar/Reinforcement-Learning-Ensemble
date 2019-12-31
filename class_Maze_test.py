@@ -99,6 +99,7 @@ class Maze:
         self.get_state = get_state
         
         solvable_maze = False
+        repeats=0
         while not solvable_maze:
             rows = 6
             cols = 9
@@ -118,7 +119,11 @@ class Maze:
             for wi in wall_indices:
                 self.walls.append(self.index2coordinates(wi, cols))
             self.generateMaze()
+            print(self.maze)
             solvable_maze=self.testMaze()
+            if repeats > 0:
+                print(repeats)
+            repeats+=1
     def initDynGoalMaze(self):
         def get_state():
             return self.getPositionArray(), self.getGoalArray()
@@ -148,7 +153,42 @@ class Maze:
         self.generateMaze()
         
     def initGenMaze(self):
-        pass
+        def get_state():
+            pass
+        
+        self.get_state = get_state
+        
+        rows = 6
+        cols = 9
+        
+        self.position= [2,0]
+        position_index = self.coordinates2index(self.position, cols)
+        goal_possible_indices = list(set(range(rows*cols)) - set([position_index]))
+        goal_index = np.random.choice(goal_possible_indices)
+        self.goal = self.index2coordinates(goal_index, cols)
+        
+        solvable_maze = False
+        repeats=0
+        while not solvable_maze:
+            indices_n = rows*cols
+            obstacles_n = np.random.randint(4, high=9)
+            
+            possible_position = list(range(indices_n))
+            start_index = self.coordinates2index(self.position, cols)
+            goal_index = self.coordinates2index(self.goal, cols)
+            for index in [start_index, goal_index]:
+                possible_position.remove(index)
+            wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
+            self.walls = list()
+            for wi in wall_indices:
+                self.walls.append(self.index2coordinates(wi, cols))
+            self.generateMaze()
+            print(self.maze)
+            solvable_maze=self.testMaze()
+            if repeats > 0:
+                print(repeats)   
+            repeats+=1
+        
     
     def generateMaze(self):
         maze = np.empty([6, 9], dtype=str) 
