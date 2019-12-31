@@ -3,9 +3,13 @@ import numpy as np
 
 class Maze:
     def __init__(self):
-        self.get_state=None
-    
-    
+        # Not needed to initialize them to None, but it is an easy overview 
+        # in one place
+        self.get_state = None
+        self.maze = None
+        self.position = None
+        self.possibleActions= ["up","down", "right", "left"] #Always true
+        
     def initSmallMaze(self):    
         '''
         Method to generate an initial 9x6 Sutton's Dyna maze.
@@ -31,7 +35,6 @@ class Maze:
         # initialize maze 
         self.maze= maze
         self.position = [2,0]
-        self.possibleActions= ["up","down", "right", "left"]
         
     def determineAction(self, intendedAction):
         '''
