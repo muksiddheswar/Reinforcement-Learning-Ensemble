@@ -8,6 +8,7 @@ class Maze:
         self.get_state = None
         self.maze = None
         self.position = None
+        self.wall_indices=None
         self.possibleActions= ["up","down", "right", "left"] #Always true
         
     def initSmallMaze(self):    
@@ -103,37 +104,104 @@ class Maze:
         self.maze= maze
     
     def initDynObstacMaze(self):
-        rows = 6
-        cols = 9
-        maze=np.empty([rows, cols], dtype=str)
-        indices_n = rows*cols
-        obstacles_n = np.random.randint(4, high=9)
-        possible_position = list(range(indices_n))
+        def get_state():
+            return self.getPositionArray(), self.getWallIndexArray()
+        self.get_state = get_state
+        solvable_maze = False
+        while not solvable_maze:
+            rows = 6
+            cols = 9
+            maze=np.empty([rows, cols], dtype=str)
+            indices_n = rows*cols
+            obstacles_n = np.random.randint(4, high=9)
+            possible_position = list(range(indices_n))
+            
+            # Add start to maze
+            self.position= [2,0]
+            start_index = self.coordinates2index(self.position, cols)
+            maze[self.position[0],self.position[1]]="S"
+            
+            
+            # Add Goal to maze
+            goal_coordinates = [0, 8]
+            goal_index = self.coordinates2index(goal_coordinates, cols)
+            maze[goal_coordinates[0],goal_coordinates[1]]="G"
+            
+            # Add walls to maze
+            for index in [start_index, goal_index]:
+                possible_position.remove(index)
+            self.wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
+            for wi in self.wall_indices:
+                coordinates = self.index2coordinates(wi, cols)
+                i = coordinates[0]
+                j = coordinates[1]
+                maze[i,j]="W"
+            self.maze= maze
+            solvable_maze=self.testMaze()
+            
+    def getPositionArray(self):
+        cols = len(self.maze[0])
+        index = self.coordinates2index(self.position, cols)
+        positionArray= [False]*self.maze.size
+        positionArray[index]=True
+        return positionArray
+    def getWallIndexArray(self):
+        wallIndexArray= [False]*self.maze.size
+        for wallIndex in self.wall_indices:
+            wallIndexArray[wallIndex]=True
+        return wallIndexArray
         
-        # Add start to maze
-        start_index = 18
-        maze[self.index2coordinates(start_index,cols)[0],self.index2coordinates(start_index,cols)[1]]="S"
-        
-        # Add Goal to maze
-        goal_index = 8
-        maze[self.index2coordinates(goal_index,cols)[0],self.index2coordinates(goal_index,cols)[1]]="G"
-        
-        # Add walls to maze
-        for index in [start_index, goal_index]:
-            possible_position.remove(index)
-        wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
-        for wi in wall_indices:
-            coordinates = self.index2coordinates(wi, cols)
-            i = coordinates[0]
-            j = coordinates[1]
-            maze[i,j]="W"
-        self.maze= maze
-        
-        
+    def testMaze(self):
+        '''
+        Test whether the maze is solvable.
+        Walls may not obstruct the path from the current position of the agent to the goal
+        '''
+        rows= len(self.maze)
+        cols= len(self.maze[0])
+        states2check = {self.coordinates2index(self.position, cols)}
+        states_checked = set()
+        while len(states2check)>0:
+            #print("states to check:", states2check)
+            #print("states checked:", states_checked)
+            #print()
+            state = states2check.pop()
+            states_checked.add(state)
+            i,j = self.index2coordinates(state, cols)
+            if self.maze[i,j]=="G":
+                return True
+            elif self.maze[i,j]!="W":
+                states2check = (states2check | set(self.getNeighbourIndices(state,rows,cols))) - states_checked
+        return False
     
     def index2coordinates(self, index, cols):
         return (index // cols, index % cols)
+    
+    def coordinates2index(self, coordinates, cols):
+        i = coordinates[0]
+        j = coordinates[1]
+        index = i*cols + j
+        return index
+    
+    def getNeighbourCoordinates(self, coordinates, rows, cols):
+        i = coordinates[0]
+        j = coordinates[1]
+        neighbours = list()
+        for newCoordinates in [(i,j+1),(i,j-1),(i+1,j),(i-1,j)]:
+            iNeighbour=newCoordinates[0]
+            jNeighbour=newCoordinates[1]
+            if not (iNeighbour < 0 or jNeighbour < 0 or iNeighbour >= rows or jNeighbour >= cols):
+                neighbours.append(newCoordinates)
+        return neighbours
                 
+    
+    def getNeighbourIndices(self, index, rows, cols):
+        coordinates = self.index2coordinates(index, cols)
+        neighbours = self.getNeighbourCoordinates(coordinates, rows, cols)
+        neighbour_indices=list()
+        for neighbour_coordinates in neighbours:
+            neighbour_indices.append(self.coordinates2index(neighbour_coordinates, cols))
+        return neighbour_indices
+            
     def determineAction(self, intendedAction):
         '''
         Method that determines the action.
