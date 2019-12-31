@@ -5,8 +5,5 @@ import numpy as np
 for i in range(int(1e1)):
     maze = Maze()
     maze.initDynGoalMaze()
-    positionArray, goalArray = maze.get_state()
-    print("Position array: ", positionArray)
-    print()
-    print("Goal array: ", goalArray)
-    print("\n\n\n")
+    print(type(maze.get_state()))
+    

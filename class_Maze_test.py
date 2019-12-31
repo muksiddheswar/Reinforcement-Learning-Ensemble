@@ -94,7 +94,7 @@ class Maze:
     
     def initDynObstacMaze(self):
         def get_state():
-            return self.getPositionArray(), self.getWallIndexArray()
+            return np.append(self.getPositionArray(), self.getWallIndexArray())
         
         self.get_state = get_state
         
@@ -126,7 +126,7 @@ class Maze:
             repeats+=1
     def initDynGoalMaze(self):
         def get_state():
-            return self.getPositionArray(), self.getGoalArray()
+            return np.append(self.getPositionArray(), self.getGoalArray())
         
         self.get_state = get_state
         
