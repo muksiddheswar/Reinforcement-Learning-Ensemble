@@ -120,7 +120,33 @@ class Maze:
             self.generateMaze()
             solvable_maze=self.testMaze()
     def initDynGoalMaze(self):
-        pass
+        def get_state():
+            pass
+        
+        self.get_state = get_state
+        
+        self.position= [2,0]
+        self.walls = [
+                (1,2),
+                (2,2),
+                (3,2),
+                (0,7),
+                (1,7),
+                (2,7),
+                (4,5)
+                ]
+        
+        rows = 6
+        cols = 9
+        position_index = self.coordinates2index(self.position, cols)
+        wall_indices = list()
+        for coordinate in self.walls:
+            wall_indices.append(self.coordinates2index(coordinate, cols))
+        goal_possible_indices = list(set(range(rows*cols)) - set([position_index]) - set(wall_indices))
+        goal_index = np.random.choice(goal_possible_indices)
+        self.goal = self.index2coordinates(goal_index, cols)
+        self.generateMaze()
+        
     
     def generateMaze(self):
         maze = np.empty([6, 9], dtype=str) 
