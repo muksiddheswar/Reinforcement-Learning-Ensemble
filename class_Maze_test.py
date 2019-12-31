@@ -101,9 +101,39 @@ class Maze:
         
         # initialize maze 
         self.maze= maze
+    
+    def initDynObstacMaze(self):
+        rows = 6
+        cols = 9
+        maze=np.empty([rows, cols], dtype=str)
+        indices_n = rows*cols
+        obstacles_n = np.random.randint(4, high=9)
+        possible_position = list(range(indices_n))
         
-
+        # Add start to maze
+        start_index = 18
+        maze[self.index2coordinates(start_index,cols)[0],self.index2coordinates(start_index,cols)[1]]="S"
         
+        # Add Goal to maze
+        goal_index = 8
+        maze[self.index2coordinates(goal_index,cols)[0],self.index2coordinates(goal_index,cols)[1]]="G"
+        
+        # Add walls to maze
+        for index in [start_index, goal_index]:
+            possible_position.remove(index)
+        wall_indices = np.random.choice(possible_position, size=obstacles_n, replace=False)
+        for wi in wall_indices:
+            coordinates = self.index2coordinates(wi, cols)
+            i = coordinates[0]
+            j = coordinates[1]
+            maze[i,j]="W"
+        self.maze= maze
+        
+        
+    
+    def index2coordinates(self, index, cols):
+        return (index // cols, index % cols)
+                
     def determineAction(self, intendedAction):
         '''
         Method that determines the action.
