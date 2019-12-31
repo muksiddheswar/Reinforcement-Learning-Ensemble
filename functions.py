@@ -126,7 +126,7 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_state
 	final_reward = 0
 	for episode in range(number_episodes):
 		maze.initSmallMaze()
-		s_0 = maze.get_position_index()
+		s_0 = maze.get_state()
 		(average_reward,list_position,A) = simulation_1_epsiode(maze,action_selection,A,s_0,max_it)
 		if((episode+1)%interval_reward_storage ==0):
 			cum_reward += average_reward
@@ -142,7 +142,7 @@ N_actions = 4
 N_states = 54
 max_it = 1000
 action_selection = 'SARSA'
-number_episodes = 50000
+number_episodes = 500
 interval_reward_storage = 2500
 
 simulation_multiple_episodes(number_episodes,action_selection,max_it,N_states,N_actions,maze_1_parameters,interval_reward_storage)

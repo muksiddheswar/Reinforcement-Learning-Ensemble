@@ -3,18 +3,22 @@ import numpy as np
 
 class Maze:
     def __init__(self):
-        pass
+        self.get_state=None
     
     
     def initSmallMaze(self):    
         '''
         Method to generate an initial 9x6 Sutton's Dyna maze.
         '''
+        def get_position_index():
+            return(self.position[0]*self.maze.shape[1] + self.position[1])
+        
+        self.get_state = get_position_index
         # initialize empty maze
         maze=np.empty([6, 9], dtype=str)
 
         # Add Start
-        maze[2,0]="A"
+        #maze[2,0]="A" # Not needed I think
 
         # Add Goal
         maze[0,8]="G"
@@ -35,7 +39,6 @@ class Maze:
         There is a probabilistic chance of 80 % to return the intended action.
         20 % chance to do a random action.
         '''
-        
         # Generate random number between 0 and 1
         rand = np.random.random()
         
@@ -48,9 +51,6 @@ class Maze:
         # return intended action
         else:
             return intendedAction
-    
-    def get_position_index(self):
-        return(self.position[0]*self.maze.shape[1] + self.position[1])
 
     def move(self, intended_action_index):
         '''
@@ -69,12 +69,12 @@ class Maze:
             next_position[1] +=1
 
         if(next_position[0]<0 or next_position[0]>=self.maze.shape[0] or next_position[1]<0 or next_position[1]>=self.maze.shape[1]):
-            return(self.get_position_index(),-2,False)
+            return(self.get_state(),-2,False)
         elif(self.maze[next_position[0],next_position[1]] == 'W'):
-            return(self.get_position_index(),-2,False)
+            return(self.get_state(),-2,False)
         elif(self.maze[next_position[0],next_position[1]] == 'G'):
             self.position = next_position
-            return(self.get_position_index(),100,True)
+            return(self.get_state(),100,True)
         else:
             self.position = next_position
-            return(self.get_position_index(),-0.1,False)
+            return(self.get_state(),-0.1,False)
