@@ -329,3 +329,4 @@ class Maze:
         else:
             self.position = next_position
             return(self.get_state(),-0.1,False)
+
