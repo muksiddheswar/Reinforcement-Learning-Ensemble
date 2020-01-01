@@ -1,8 +1,6 @@
 import numpy as np 
-import matplotlib.pyplot as plt
 from class_Maze_test import Maze
-
-import tensorflow as tf
+from scipy.stats import binom
 
 class NN_Model:
 	def __init__(self, num_states, num_actions,hidden_neurons,learning_rate):
@@ -12,8 +10,10 @@ class NN_Model:
 		self.num_actions = num_actions
 		self.hidden_neurons = hidden_neurons
 		self.learning_rate = learning_rate
-		self.bias_hidden = 0 #np.random.normal(loc=mean_weight, scale=std_weight, size = (hidden_neurons,))
-		self.bias_output = 0 #np.random.normal(loc=mean_weight, scale=std_weight, size = (num_actions,))
+		self.bias_hidden = np.random.normal(loc=mean_weight, scale=std_weight, size = (hidden_neurons,))
+		self.bias_hidden = np.array(self.bias_hidden, ndmin=2).T
+		self.bias_output = np.random.normal(loc=mean_weight, scale=std_weight, size = (num_actions,))
+		self.bias_output = np.array(self.bias_output, ndmin=2).T
 		self.W_hidden = np.random.normal(loc=mean_weight, scale=std_weight, size = (hidden_neurons,num_states))
 		self.W_output = np.random.normal(loc=mean_weight, scale=std_weight, size = (num_actions,hidden_neurons))
 
@@ -21,18 +21,24 @@ class NN_Model:
 		return 1/(1+np.exp(-x))
 
 	def predict(self, state):
-		return(np.dot(self.W_output,self.sigmoid(np.dot(self.W_hidden,state)+self.bias_hidden))+self.bias_output)
+		state = np.array(state.flatten(), ndmin=2).T
+		output = np.dot(self.W_output,self.sigmoid(np.dot(self.W_hidden,state)+self.bias_hidden))+self.bias_output
+		return(output.flatten())
 		
 	def train(self, state, error_term):
 		state = np.array(state, ndmin=2).T
 		error_term = np.array(error_term, ndmin=2).T
 		output = self.predict(state)
 		hidden_layer_output = self.sigmoid(np.dot(self.W_hidden,state)+self.bias_hidden)
-		self.W_output += self.learning_rate*np.dot(error_term,hidden_layer_output.T)
-		#self.bias_output += self.learning_rate*error_term
-		hidden_errors = np.dot(self.W_output.T, error_term)
-		self.W_hidden += self.learning_rate*np.dot(hidden_errors*hidden_layer_output*(1.0 - hidden_layer_output),state.T)
-		#self.bias_hidden += self.learning_rate*hidden_errors*hidden_layer_output*(1.0 - hidden_layer_output)
+		hidden_error = hidden_layer_output * (1 - hidden_layer_output) * np.dot(self.W_output.T,error_term)
+
+		hidden_pd = np.dot(hidden_error,state.T)
+		output_pd = np.dot(error_term,hidden_layer_output.T) 
+
+		self.W_hidden += self.learning_rate*hidden_pd
+		self.bias_hidden += self.learning_rate*hidden_error
+		self.W_output += self.learning_rate*output_pd
+		self.bias_output += self.learning_rate*error_term
 
 class RL_model:
 	def __init__(self,N_pos,N_actions,input_parameters,maze_type,action_selection):
@@ -51,7 +57,7 @@ class RL_model:
 			self.v_AC = np.zeros(N_pos)
 			self.q_QV = np.zeros((N_pos,N_actions))
 			self.v_QV = np.zeros(N_pos)
-			self.p_ACLA = np.zeros((N_pos,N_actions))
+			self.p_ACLA = np.ones((N_pos,N_actions))/N_actions
 			self.v_ACLA = np.zeros(N_pos)
 		else:
 			self.q_QL = NN_Model(self.num_states[maze_type], self.N_actions,self.hidden_neurons[maze_type],self.parameters[0,0])
@@ -63,19 +69,25 @@ class RL_model:
 			self.p_ACLA = NN_Model(self.num_states[maze_type], self.N_actions,self.hidden_neurons[maze_type],self.parameters[4,0])
 			self.v_ACLA = NN_Model(self.num_states[maze_type], 1,self.hidden_neurons[maze_type],self.parameters[4,1])
 
-	def init_state(self,maze_output):
+	def init_state(self,maze):
+		maze_output = maze.get_state()
 		if (self.maze_type!=1):
 			return(maze_output)
 		else:
-			pass
+			state = np.zeros(maze.maze.size)
+			for i in range(len(maze.maze)):
+				for j in range(len(maze.maze[0])):
+					if (maze.maze[i,j] != 'W'):
+						state[i*len(maze.maze[0])+j] = 1
+			return(state/np.sum(state))
 
 	def get_weights_for_boltzmann(self,state,selection_policy):
 		if(selection_policy == 'QL'): 
 			if (self.maze_type == 0): return(self.q_QL[state,:])
-			else: return(self.q_SARSA.predict(state))
+			else: return(self.q_QL.predict(state))
 		elif(selection_policy == 'SARSA'): 
 			if (self.maze_type == 0): return(self.q_SARSA[state,:])
-			else: return(self.q_QL.predict(state)) 
+			else: return(self.q_SARSA.predict(state)) 
 		elif(selection_policy == 'AC'): 
 			if (self.maze_type == 0):return(self.p_AC[state,:])
 			else: return(self.p_AC.predict(state))
@@ -86,11 +98,75 @@ class RL_model:
 			if (self.maze_type == 0): return(self.p_ACLA[state,:])
 			else: return(self.p_ACLA.predict(state))
 
-	def update_state(self,state,obs):
+	def update_state(self,state,obs,action,maze):
 		if (self.maze_type!=1):
 			return(obs)
 		else:
-			pass
+			n_cols = len(maze.maze[0])
+			n_rows = len(maze.maze)
+			#self.possibleActions= ["up","down", "right", "left"]
+			for i in range(n_rows):
+				for j in range(n_cols):
+					tmp = 0
+					#Contibution from up position (which is actually the up position in the matrix)
+					if (maze.possibleActions[action] == 'down'):p = 0.85
+					else: p = 0.05
+
+					if (i==n_rows-1): tmp += state[i*n_cols+j]*p
+					elif(maze.maze[i+1,j]=='W'): tmp += state[i*n_cols+j]*p
+					else: tmp += state[(i+1)*n_cols+j]*p
+						
+					#Contibution from down position (which is actually the up position in the matrix)
+					if (maze.possibleActions[action] == 'up'):p = 0.85
+					else: p = 0.05
+
+					if (i==0): tmp += state[i*n_cols+j]*p
+					elif(maze.maze[i-1,j]=='W'): tmp += state[i*n_cols+j]*p
+					else: tmp += state[(i-1)*n_cols+j]*p
+							
+					#Contibution from right position
+					if (maze.possibleActions[action] == 'left'):p = 0.85
+					else: p = 0.05
+					if (j==n_cols-1): tmp += state[i*n_cols+j]*p
+					elif (maze.maze[i,j+1]=='W'): tmp += state[i*n_cols+j]*p
+					else: tmp += state[i*n_cols+j+1]*p
+
+					#Contibution from left position
+					if (maze.possibleActions[action] == 'right'):p = 0.85
+					else: p = 0.05
+
+					if (j==0): tmp += state[i*n_cols+j]*p
+					elif (maze.maze[i,j-1]=='W'): tmp += state[i*n_cols+j]*p
+					else: tmp += state[i*n_cols+j-1]*p
+					
+					#Calculate the number of differences in the observations and their probability
+					diff_observations = 0 #Number of differences in the observations
+					if(i==n_rows-1):
+						if(not obs[0]): diff_observations +=1
+					else:
+						if(maze.maze[i+1,j]=='W' and not obs[0]): diff_observations +=1
+						elif (maze.maze[i+1,j]!='W' and obs[0]): diff_observations +=1
+
+					if(i==0):
+						if(not obs[1]): diff_observations +=1
+					else:
+						if(maze.maze[i-1,j]=='W' and not obs[1]): diff_observations +=1
+						elif (maze.maze[i-1,j]!='W' and obs[1]): diff_observations +=1
+
+					if(j==n_cols-1):
+						if(not obs[2]): diff_observations +=1
+					else:
+						if(maze.maze[i,j+1]=='W' and not obs[2]): diff_observations +=1
+						elif (maze.maze[i,j+1]!='W' and obs[2]): diff_observations +=1
+
+					if(j==0):
+						if(not obs[3]): diff_observations +=1
+					else:
+						if(maze.maze[i,j-1]=='W' and not obs[3]): diff_observations +=1
+						elif (maze.maze[i,j-1]!='W' and obs[3]): diff_observations +=1
+
+					state[i*n_cols+j] = tmp+binom.pmf(diff_observations,4,0.9)
+			return(state/np.sum(state))
 
 	def update_model(self,state,action,next_state,reward,action_selection):
 		if(action_selection == 'QL'): 
@@ -182,8 +258,8 @@ class RL_model:
 					self.p_ACLA[state,action] += alpha*(1-self.p_ACLA[state,action])
 				else:
 					self.p_ACLA[state,i] += alpha*(0-self.p_ACLA[state,i])
-				if(self.p_ACLA[state,action]>1): self.p_ACLA[state,action] = 1
-				elif(self.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
+				if(self.p_ACLA[state,i]>1): self.p_ACLA[state,i] = 1
+				elif(self.p_ACLA[state,i]<0): self.p_ACLA[state,i] = 0
 		else:
 			normalisation = np.sum(self.p_ACLA[state,:])-self.p_ACLA[state,action]
 			for i in range(N_actions):
@@ -191,12 +267,12 @@ class RL_model:
 					self.p_ACLA[state,action] += alpha*(0-self.p_ACLA[state,action])
 				else:
 					if(normalisation <= 0):
-						self.p_ACLA[state,i] =  1.0/(self.N_actions-1)
+						self.p_ACLA[state,i] +=  1.0/(self.N_actions-1)
 					else:
 						self.p_ACLA[state,i] += alpha*self.p_ACLA[state,i]*((1.0/normalisation)-1)
 
-				if(self.p_ACLA[state,action]>1): self.p_ACLA[state,action] = 1
-				elif(self.p_ACLA[state,action]<0): self.p_ACLA[state,action] = 0
+				if(self.p_ACLA[state,i]>1): self.p_ACLA[state,i] = 1
+				elif(self.p_ACLA[state,i]<0): self.p_ACLA[state,i] = 0
 
 	def softmax_selection (self,weight,action_selection):
 		'''Returns Boltzamann distribution of preferences q_estimate and temperature t'''
@@ -222,21 +298,21 @@ def update_reward_scores (reward,final_reward_2_addition,cum_reward_2_addition,n
 def simulation_1_epsiode(maze,action_selection,A,max_it,number_episodes,interval_reward_storage,step_number):
 	if(not action_selection in A.list_algorithms): raise('action_selection is not valid')
 	Total_reward = 0
-	state = A.init_state(maze.get_state())
+	state = A.init_state(maze)
 	list_position = []
 	final_reward_2_addition = 0
 	cum_reward_2_addition = 0
 	for i in range(max_it):
 		weights = A.get_weights_for_boltzmann(state,action_selection)
 		prob = A.softmax_selection(weights,action_selection)
-		print(weights,prob)
 		action = np.random.choice(A.N_actions,p=prob)
 		(obs,reward,won) = maze.move(action)
 		list_position.append(maze.position)
 		Total_reward += reward
 		(final_reward_2_addition,cum_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition,cum_reward_2_addition,number_episodes,interval_reward_storage,step_number)
-		A.update_model(state,action,obs,reward,action_selection)
-		state = A.update_state(state,obs)
+		next_state = A.update_state(state,obs,action,maze)
+		A.update_model(state,action,next_state,reward,action_selection)
+		state = next_state
 		if(won): break
 		step_number +=1
 	return(Total_reward/(i+1),list_position,A,final_reward_2_addition,cum_reward_2_addition)
@@ -254,6 +330,7 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N
 	final_reward_2 = 0
 	step_number = 0
 	for episode in range(number_episodes):
+		maze = Maze()
 		if (maze_type == 0): maze.initSmallMaze()
 		elif(maze_type == 1): maze.initPartObsMaze()
 		elif (maze_type == 2): maze.initDynObstacMaze()
@@ -270,13 +347,12 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N
 			final_reward_1 +=average_reward
 		print(step_number,average_reward)
 		if(step_number>=number_episodes): break
-
 	final_reward_1 /= interval_reward_storage
 	final_reward_2 /= interval_reward_storage
 	print(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
 	return(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
 
-maze_type = 2
+maze_type = 1
 N_actions = 4
 N_pos = 54
 max_it = 1000
@@ -288,7 +364,7 @@ maze_parameters.append(np.array([[0.005,-1,0.95,0.5],[0.008,-1,0.95,0.6],[0.006,
 #maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,0.95,1],[0.01,0.01,0.9,0.4],[0.06,0.002,0.98,6]])) #Maze 0
 
 action_selection = 'QL'
-number_episodes = 3*(10**6)
-interval_reward_storage = 150000
+number_episodes = [50000,10**5,3*(10**6),3*(10**6),15*(10**6)] #for each maze, different number of learning steps
+interval_reward_storage = [2500,5000,150000,150000,750000]
 
-simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage,maze_type)
+simulation_multiple_episodes(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
