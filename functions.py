@@ -102,6 +102,7 @@ class RL_model:
 		if (self.maze_type!=1):
 			return(obs)
 		else:
+			new_state = np.copy(state)
 			n_cols = len(maze.maze[0])
 			n_rows = len(maze.maze)
 			#self.possibleActions= ["up","down", "right", "left"]
@@ -165,7 +166,8 @@ class RL_model:
 						if(maze.maze[i,j-1]=='W' and not obs[3]): diff_observations +=1
 						elif (maze.maze[i,j-1]!='W' and obs[3]): diff_observations +=1
 
-					state[i*n_cols+j] = tmp+binom.pmf(diff_observations,4,0.9)
+					new_state[i*n_cols+j] = tmp+binom.pmf(diff_observations,4,0.9)
+			state = new_state
 			return(state/np.sum(state))
 
 	def update_model(self,state,action,next_state,reward,action_selection):
@@ -352,7 +354,7 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N
 	print(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
 	return(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
 
-maze_type = 1
+maze_type = 3
 N_actions = 4
 N_pos = 54
 max_it = 1000
@@ -363,7 +365,7 @@ maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,
 maze_parameters.append(np.array([[0.005,-1,0.95,0.5],[0.008,-1,0.95,0.6],[0.006,0.008,0.95,0.6],[0.012,0.004,0.9,0.6],[0.06,0.006,0.98,10]])) #Maze 3
 #maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,0.95,1],[0.01,0.01,0.9,0.4],[0.06,0.002,0.98,6]])) #Maze 0
 
-action_selection = 'QL'
+action_selection = 'AC'
 number_episodes = [50000,10**5,3*(10**6),3*(10**6),15*(10**6)] #for each maze, different number of learning steps
 interval_reward_storage = [2500,5000,150000,150000,750000]
 
