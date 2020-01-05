@@ -1,4 +1,3 @@
-import sys
 import numpy as np
 from class_Maze_test import Maze
 from scipy.stats import binom
@@ -485,16 +484,17 @@ maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,
 maze_parameters.append(np.array([[0.005,-1,0.95,0.5],[0.008,-1,0.95,0.6],[0.006,0.008,0.95,0.6],[0.012,0.004,0.9,0.6],[0.06,0.006,0.98,10]])) #Maze 3
 #maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,0.95,1],[0.01,0.01,0.9,0.4],[0.06,0.002,0.98,6]])) #Maze 0
 
-action_selection = 'QL'
+# ['QL', 'SARSA', 'AC', 'QV', 'ACLA']
+# # ['MV', 'RV', 'BM', 'BA']
+action_selection = 'RV'
 number_episodes = [50000,10**5,3*(10**6),3*(10**6),15*(10**6)] #for each maze, different number of learning steps
 interval_reward_storage = [2500,5000,150000,150000,750000]
 
 # simulation_multiple_episodes(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
 
 # simulation_multiple_episodes(100,action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
-# simulation_multiple_episodes(100,'MV' ,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
+simulation_multiple_episodes(100,'MV' ,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
 
 
-# print(sys.getrecursionlimit())
-# sys.setrecursionlimit(1500)
-simulation_multiple_episodes_2(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
+
+# simulation_multiple_episodes_2(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
