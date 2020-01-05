@@ -1,4 +1,5 @@
-import numpy as np 
+import sys
+import numpy as np
 from class_Maze_test import Maze
 from scipy.stats import binom
 
@@ -329,11 +330,11 @@ class RL_model:
 		prob = self.softmax_selection(prob_add, 'BA')
 		return prob
 
-def update_reward_scores (reward,final_reward_2_addition,number_episodes,interval_reward_storage,step_number):
-	if (step_number >= number_episodes-interval_reward_storage and step_number < number_episodes):
-		# Final Reward intake during the last "interval_reward_storage" number of time-steps
-		final_reward_2_addition += reward
-	return final_reward_2_addition
+# def update_reward_scores (reward,final_reward_2_addition,number_episodes,interval_reward_storage,step_number):
+# 	if (step_number >= number_episodes-interval_reward_storage and step_number < number_episodes):
+# 		# Final Reward intake during the last "interval_reward_storage" number of time-steps
+# 		final_reward_2_addition += reward
+# 	return final_reward_2_addition
 
 def simulation_1_epsiode(maze,action_selection,A,max_it,number_episodes,interval_reward_storage,step_number):
 	if(not action_selection in A.list_algorithms): raise('action_selection is not valid')
@@ -349,7 +350,11 @@ def simulation_1_epsiode(maze,action_selection,A,max_it,number_episodes,interval
 		(obs,reward,won) = maze.move(action)
 		list_position.append(maze.position)
 		Total_reward += reward
-		(final_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition,number_episodes,interval_reward_storage,step_number)
+
+		if (step_number >= number_episodes - interval_reward_storage and step_number < number_episodes):
+			# Final Reward intake during the last "interval_reward_storage" number of time-steps
+			final_reward_2_addition += reward
+
 		next_state = A.update_state(state,obs,action,maze)
 		A.update_model(state,action,next_state,reward,action_selection)
 		state = next_state
@@ -387,13 +392,19 @@ def simulation_1_ensemble_epsiode(maze, action_selection, A , max_it , number_ep
 		(obs,reward,won) = maze.move(action)
 		list_position.append(maze.position)
 		Total_reward += reward
-		(final_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition, number_episodes, interval_reward_storage, step_number)
+
+		# (final_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition, number_episodes, interval_reward_storage, step_number)
+		if (step_number >= number_episodes - interval_reward_storage and step_number < number_episodes):
+			# Final Reward intake during the last "interval_reward_storage" number of time-steps
+			final_reward_2_addition += reward
+
 		for num, j in enumerate(A.list_algorithms):
 			next_state = A.update_state(state, obs, action, maze)
 			A.update_model(state, action, next_state, reward, j)
 			state = next_state
 			if (won): break
 			step_number += 1
+
 	return(Total_reward , list_position,A,final_reward_2_addition)
 
 
@@ -428,18 +439,38 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N
 		step_number += len(list_position)
 		final_reward_2 += final_reward_2_addition
 
-		if(episode>=number_episodes-interval_reward_storage):
-			final_reward_1 +=Total_reward
-
-		print(step_number,Total_reward)
-
+		# if(episode>=number_episodes-interval_reward_storage):
+		final_reward_1 += Total_reward
+		# print(step_number,Total_reward)
 		if(step_number>=number_episodes): break
+
 	final_reward_1 /= interval_reward_storage
 	final_reward_2 /= interval_reward_storage
-	print(final_reward_1,final_reward_2)
-	return(final_reward_1,final_reward_2)
 
-maze_type = 3
+	# print("Final  Cumulative")
+	# print(final_reward_2, final_reward_1)
+	return(final_reward_2, final_reward_1)
+
+
+def simulation_multiple_episodes_2(number_episodes,action_selection,max_it,N_pos,N_actions,input_parameters,interval_reward_storage,maze_type):
+	k = 500
+	final_reward = np.zeros(k)
+	cumulative_reward = np.zeros(k)
+	for i in range(k):
+		final_reward_2, final_reward_1 = simulation_multiple_episodes(number_episodes, action_selection, max_it, N_pos, N_actions, input_parameters,
+									   interval_reward_storage, maze_type)
+		final_reward[i] = final_reward_2
+		cumulative_reward[i] = final_reward_1
+		print(final_reward_2, final_reward_1)
+	print("Final Reward- Mean, Std Dev")
+	print(np.mean(final_reward), np.std(final_reward))
+	print("Cumulative- Mean, Std Dev")
+	print(np.mean(cumulative_reward), np.std(cumulative_reward))
+
+
+
+
+maze_type = 0
 N_actions = 4
 N_pos = 54
 max_it = 1000
@@ -454,12 +485,16 @@ maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,
 maze_parameters.append(np.array([[0.005,-1,0.95,0.5],[0.008,-1,0.95,0.6],[0.006,0.008,0.95,0.6],[0.012,0.004,0.9,0.6],[0.06,0.006,0.98,10]])) #Maze 3
 #maze_parameters.append(np.array([[0.01,-1,0.95,1],[0.01,-1,0.95,1],[0.015,0.003,0.95,1],[0.01,0.01,0.9,0.4],[0.06,0.002,0.98,6]])) #Maze 0
 
-action_selection = 'AC'
+action_selection = 'QL'
 number_episodes = [50000,10**5,3*(10**6),3*(10**6),15*(10**6)] #for each maze, different number of learning steps
 interval_reward_storage = [2500,5000,150000,150000,750000]
 
 # simulation_multiple_episodes(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
 
-maze_type = 0
 # simulation_multiple_episodes(100,action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
-simulation_multiple_episodes(100,'MV' ,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
+# simulation_multiple_episodes(100,'MV' ,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
+
+
+# print(sys.getrecursionlimit())
+# sys.setrecursionlimit(1500)
+simulation_multiple_episodes_2(number_episodes[maze_type],action_selection,max_it,N_pos,N_actions,maze_parameters[maze_type],interval_reward_storage[maze_type],maze_type)
