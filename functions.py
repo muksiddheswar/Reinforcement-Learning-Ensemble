@@ -44,6 +44,7 @@ class RL_model:
 	def __init__(self,N_pos,N_actions,input_parameters,maze_type,action_selection):
 		self.list_algorithms = ['QL', 'SARSA', 'AC', 'QV', 'ACLA']
 		self.list_ensemble_algorithms = ['MV', 'RV', 'BM', 'BA']
+		self.ensemble_greediness_parameters = [1.6, 0.6, 0.2, 1]
 		self.num_states = np.array([-1,1,2,2,3])*N_pos #Used for the number of inputs for the NN for maze 1 to 4 (and not 0)
 		self.hidden_neurons = np.array([-1,20,60,20,100])
 		self.N_actions = N_actions
@@ -281,8 +282,13 @@ class RL_model:
 	# ADD ENSEMBLE_FLAG HERE
 	def softmax_selection (self,weight,action_selection):
 		'''Returns Boltzamann distribution of preferences q_estimate and temperature t'''
-		action_selection_index = self.list_algorithms.index(action_selection)
-		t = 1.0/self.parameters[action_selection_index,3]
+		ensemble_flag = action_selection in self.list_ensemble_algorithms
+		if ensemble_flag:
+			action_selection_index = self.list_ensemble_algorithms.index(action_selection)
+			t = 1.0 / self.ensemble_greediness_parameters[action_selection_index]
+		else:
+			action_selection_index = self.list_algorithms.index(action_selection)
+			t = 1.0/self.parameters[action_selection_index,3]
 		prob = np.exp(weight/t)
 		if (np.sum(np.isinf(prob))>0):
 			index = np.where(np.isinf(prob))[0][0]
@@ -302,34 +308,32 @@ class RL_model:
 					count += 1
 			action_preference[k] = count
 		# change here
-		prob = self.softmax_selection(action_preference, 'QL')
+		prob = self.softmax_selection(action_preference, 'MV')
 		return prob
 
 	def rank_voting_selection(self, algo_prob):
 		algo_ranks = np.zeros((len(self.list_algorithms), (self.N_actions)))
 		for i in range(len(self.list_algorithms)):
 			algo_ranks[i] = np.argsort(algo_prob[i])
-
 		ranks = np.sum(algo_ranks, axis = 0)
-		prob = self.softmax_selection(ranks, 'QL')
+		prob = self.softmax_selection(ranks, 'RV')
 		return prob
 
 	def b_multiplication_selection(self, algo_prob):
 		prob_mul = np.prod(algo_prob, axis = 0)
-		prob = self.softmax_selection(prob_mul, 'QL')
+		prob = self.softmax_selection(prob_mul, 'BM')
 		return prob
 
 	def b_addition_selection(self, algo_prob):
 		prob_add = np.prod(algo_prob, axis = 0)
-		prob = self.softmax_selection(prob_add, 'QL')
+		prob = self.softmax_selection(prob_add, 'BA')
 		return prob
 
-def update_reward_scores (reward,final_reward_2_addition,cum_reward_2_addition,number_episodes,interval_reward_storage,step_number):
-	if ((step_number+1)%interval_reward_storage ==0 and step_number<number_episodes):
-		cum_reward_2_addition += reward
-	if (step_number>=number_episodes-interval_reward_storage and step_number < number_episodes):
+def update_reward_scores (reward,final_reward_2_addition,number_episodes,interval_reward_storage,step_number):
+	if (step_number >= number_episodes-interval_reward_storage and step_number < number_episodes):
+		# Final Reward intake during the last "interval_reward_storage" number of time-steps
 		final_reward_2_addition += reward
-	return(final_reward_2_addition,cum_reward_2_addition)
+	return final_reward_2_addition
 
 def simulation_1_epsiode(maze,action_selection,A,max_it,number_episodes,interval_reward_storage,step_number):
 	if(not action_selection in A.list_algorithms): raise('action_selection is not valid')
@@ -345,13 +349,13 @@ def simulation_1_epsiode(maze,action_selection,A,max_it,number_episodes,interval
 		(obs,reward,won) = maze.move(action)
 		list_position.append(maze.position)
 		Total_reward += reward
-		(final_reward_2_addition,cum_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition,cum_reward_2_addition,number_episodes,interval_reward_storage,step_number)
+		(final_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition,number_episodes,interval_reward_storage,step_number)
 		next_state = A.update_state(state,obs,action,maze)
 		A.update_model(state,action,next_state,reward,action_selection)
 		state = next_state
 		if(won): break
 		step_number +=1
-	return(Total_reward/(i+1),list_position,A,final_reward_2_addition,cum_reward_2_addition)
+	return(Total_reward , list_position , A , final_reward_2_addition)
 
 def simulation_1_ensemble_epsiode(maze, action_selection, A , max_it , number_episodes , interval_reward_storage , step_number):
 	Total_reward = 0
@@ -383,28 +387,25 @@ def simulation_1_ensemble_epsiode(maze, action_selection, A , max_it , number_ep
 		(obs,reward,won) = maze.move(action)
 		list_position.append(maze.position)
 		Total_reward += reward
-		(final_reward_2_addition,cum_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition, cum_reward_2_addition, number_episodes, interval_reward_storage, step_number)
+		(final_reward_2_addition) = update_reward_scores(reward,final_reward_2_addition, number_episodes, interval_reward_storage, step_number)
 		for num, j in enumerate(A.list_algorithms):
 			next_state = A.update_state(state, obs, action, maze)
 			A.update_model(state, action, next_state, reward, j)
 			state = next_state
 			if (won): break
 			step_number += 1
-	return(Total_reward/(i+1),list_position,A,final_reward_2_addition,cum_reward_2_addition)
+	return(Total_reward , list_position,A,final_reward_2_addition)
 
 
 def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N_actions,input_parameters,interval_reward_storage,maze_type):
-	# It is not clear in the paper if a learning step is defined as 1 move or 1 espisode. 
-	# Therefore the final reward and cum reward are calculated for both interpretations
-	# final_reward_1 and cum_reward_1 are for learning step = 1 episode
-	# final_reward_2 and cum_reward_2 are for learning step = 1 move
 	maze = Maze()
 	A = RL_model(N_pos,N_actions,input_parameters,maze_type,action_selection)
 	ensemble_flag = action_selection in A.list_ensemble_algorithms
-	cum_reward_1 = 0
+	# All Rewards
 	final_reward_1 = 0
-	cum_reward_2 = 0
+	# Reward of last few steps
 	final_reward_2 = 0
+
 	step_number = 0
 	for episode in range(number_episodes):
 		maze = Maze()
@@ -416,27 +417,27 @@ def simulation_multiple_episodes(number_episodes,action_selection,max_it,N_pos,N
 
 
 		if ensemble_flag:
-			(average_reward,list_position,A,final_reward_2_addition,cum_reward_2_addition) = \
+			(Total_reward,list_position,A,final_reward_2_addition) = \
 				simulation_1_ensemble_epsiode(maze, action_selection, A, max_it, number_episodes,
 											  interval_reward_storage, step_number)
 		else:
-			(average_reward, list_position, A, final_reward_2_addition, cum_reward_2_addition) = \
+			(Total_reward, list_position, A, final_reward_2_addition) = \
 				simulation_1_epsiode(maze, action_selection, A, max_it, number_episodes, interval_reward_storage,
 									 step_number)
 
 		step_number += len(list_position)
-		cum_reward_2 += cum_reward_2_addition
 		final_reward_2 += final_reward_2_addition
-		if((episode+1)%interval_reward_storage ==0):
-			cum_reward_1 += average_reward
+
 		if(episode>=number_episodes-interval_reward_storage):
-			final_reward_1 +=average_reward
-		print(step_number,average_reward)
+			final_reward_1 +=Total_reward
+
+		print(step_number,Total_reward)
+
 		if(step_number>=number_episodes): break
 	final_reward_1 /= interval_reward_storage
 	final_reward_2 /= interval_reward_storage
-	print(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
-	return(cum_reward_1,final_reward_1,cum_reward_2,final_reward_2)
+	print(final_reward_1,final_reward_2)
+	return(final_reward_1,final_reward_2)
 
 maze_type = 3
 N_actions = 4
