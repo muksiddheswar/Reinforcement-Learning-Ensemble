@@ -511,8 +511,8 @@ The preference values of the ensemble are:
 
 # Experiments
 
-To compare the different RL algorithms with each other and ensemble methods,
-the agents had to solve five different maze tasks of varying complexity.
+We compared five different RL algorithms (Q-learning, SARSA, Actor-Critic, QV-learning, ACLA) with each other and with four ensemble methods (Majority Voting, Rank Voting, Boltzmann Multiplication, Boltzmann Addition).
+The agents had to solve five different maze tasks of varying complexity.
 For the first experiment,
 the agents learned to solve a small base where start, goal and walls were in static position. To do this, they combined RL algorithms with a tabular expression.
 For the second to fifth maze,
