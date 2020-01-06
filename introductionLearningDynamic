@@ -64,7 +64,12 @@ Experiments are performed on dynamic maze problems and results show that the two
 Reinforcement Learning (RL) is defined as a Machine Learning method. It is a very general framework for learning sequential decision making tasks.
 It has the particularity that it is used when we want to repeat iteratively action to learn. it is example in learning Robot and  Alpha Go where 
 reinforcement Learning is use to reach the goal. Therefore, Machine Learning (ML) are use to perform a specific task without using explicit instructions by means of its statistical models.			
-			
+Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. The problems we face in the real world can be extremely 
+complicated in many different ways and therefore a typical Reinforcement Learning (RL) algorithm has no clue to solve. For example, the state space is very large in the game of Alpha GO,
+environment cannot be fully observed in Poker game and there are lots of agents interact with each other in the real world.
+
+
+
 			
 REMARKS:
 
