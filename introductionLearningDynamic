@@ -12,7 +12,8 @@ Into the present paper we will show that several ensemble methods such as:
 Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
 combine multiple different Reinforcement Learning (RL) algorithms which are: 
 Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, and AC Learning Automaton in a single agent and the aim is to perform learning speed and final performance. 
-We show  experiments on five maze problems of varying complexity.
+We show  experiments on five maze problems of varying complexity.Also one interest think to know in this paper is that in this paper
+Reinforcement Learning (RL) algorithms combine are whith decision of methode instead to be combine by Q-value like methods in others papers.
 
 			
 Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
@@ -60,8 +61,9 @@ state value-function. but the difference between them is that QV-learning uses t
 These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, Sarsa, and conventional Actor-Critic methods.
 Experiments are performed on dynamic maze problems and results show that the two novel algorithms can outperform previously known reinforcement learning algorithms
 				
-			
-			
+Reinforcement Learning (RL) is defined as a Machine Learning method. It is a very general framework for learning sequential decision making tasks.
+It has the particularity that it is used when we want to repeat iteratively action to learn. it is example in learning Robot and  Alpha Go where 
+reinforcement Learning is use to reach the goal. Therefore, Machine Learning (ML) are use to perform a specific task without using explicit instructions by means of its statistical models.			
 			
 			
 REMARKS:
@@ -124,9 +126,9 @@ REMARKS:
 			
 			
 			
-			References
+	References
 			
-			[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
-			[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
-			[3]  Stefan Fauber and Friedhelm Schwenker. Neural Network Ensembles in Reinforcement Learning
-			[4]  Marco A. Wiering and Hado van Hasselt. Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods
+	[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
+	[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
+	[3]  Stefan Fauber and Friedhelm Schwenker. Neural Network Ensembles in Reinforcement Learning
+	[4]  Marco A. Wiering and Hado van Hasselt. Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods
