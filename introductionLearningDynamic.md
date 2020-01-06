@@ -1,13 +1,53 @@
-																									
-																									INTRODUCTION 
+# Introduction
+
+* What is Reinforcement learning
+    - how does it work in general
+    - some fancy real live applications
+    - explain basic ones (Q-learning, SARSA, Actor-Critic)
+    - explain advanced onces with paper backing (QV-learning,ACLA)
+    - function approximation for more complex tasks???
+
+* Ensemble methods
+    - How they did it in other papers
+    - How we do it differently (Concept behind it)
+    - Which algorithms used
+    - function approximation for more complex tasks???
+    
+* Work they did in our paper / transition to methods 
+
+
+<!---
+
+WHAT IS RL (GENERAL)
+
 Reinforcement Learning (RL) is an area of machine learning. 
 Software agents need to learn from experience which actions to take in an environment to maximize cumulative reward.
-The interactions and decisions the agent takes depend on the state of the environment.																
+The interactions and decisions the agent takes depend on the state of the environment.	
+               
+---> 
+
+<!--
+
+How does RL work (very general)
+
 In return the environment provides to the agent a reward which might be positve or negative. 
 The agent seeks, through iterative experiences the optimal solution by  maximizes the sum of rewards over time.
+
+--->
+
+<!--- 
+
+Transition to ENSEMBLE methods
+
 Ensemble methods are often combined with Reinforcement Learning (RL) algorithms to have a good return. 
 And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithms in Reinforcement Learning".
+
+--->
 			
+<!---
+
+WHAT did our paper do , transition to methods
+
 Into the present paper we will show that several ensemble methods such as: 
 Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
 combine multiple different Reinforcement Learning (RL) algorithms which are: 
@@ -18,7 +58,12 @@ Also one interest think to know in this paper is that in this paper
 Reinforcement Learning (RL) algorithms combine are whith decision of methode instead 
 to be combine by Q-value like methods in others papers.
 
-			
+--->
+
+<!---
+
+What are ensemble methods and benefits
+
 Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
 they perform learning speed and final performance  when applied for solving different control problems.
 Majority Voting (VM), this one combine the best action of each algorithm and  its ﬁnal decision is based on
@@ -29,8 +74,14 @@ Boltzmann mulplication(BM), uses Boltzmann exploration for each algorithm and mu
 of each action computed by each algorithm.
 and Boltzmann Addition(BA), this one is similar to Boltzmann mulplication(BM) but instead to multiplie it adds the
 Boltzmann probabilities of actions.
+
+--->
+
+<!---
+
+paper on ensemble methods multi agents function approximation
 						
-In another paper such as  Ensemble Methodes for Reinforcement Learning with Function Approximation[1], 
+In another paper such as  Ensemble Methods for Reinforcement Learning with Function Approximation[1], 
 ensemble methods have been combined with Reinforcement Learning (RL) algorithsms.
 In this paper ideas are the same like the  work that we have  elaborated with. 
 The only difference that it do not have the same method as our. 
@@ -44,7 +95,14 @@ They showed that an ensemble of three agents outperforms a single agent.
 Furthermore, they performed an experiment to learn the shortest path on  a 20×20 maze.
 The purpose of applying ensemble methods on games is to show that the learning speed is faster 
 and from that they concluded or observed an increase in learning speed. 
-			
+
+--->  
+
+
+<!---
+
+Paper about more advanced reinforcement algorithms
+
 Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2]
 do not combine Methodes and Reinforcement Learning (RL) algorithsms.
 This paper compare new Reinforcement Learning (RL) algorithsms such as QV2 with others Reinforcement Learning (RL) algorithsms 
@@ -52,13 +110,26 @@ well known as: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning,  Actor-Critic.
 These comparaison are made on  different maze tasks and the aim is to know whether there exit 
 a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
 an algorithm perform better than others. 
-			
+
+--->
+
+
+<!--- 
+
+Function approximation with neural networks
+
 Stefan Fauber and Friedhelm Schwenker, in Neural Network Ensembles in Reinforcement Learning[3], 
 propose a meta-algorithm to learn state-action values in a Neural Network Ensemble, fromed multi agent. 
 The algorithm is evaluate on a generalized maze problem and on SZ-Tetris.
 And  the  evaluations methods, like Temporal-Difference or SARSA, 
-produce good results for problems where the Markov property holds contrary 
+produce good results for problems where theYeah keep workin Markov property holds contrary 
 to the methods based ona temporal-difference.
+
+--->
+
+<!---
+
+Paper about more advanced reinforcement algorithms
 
 Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], 
 describes two novel Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). 
@@ -69,7 +140,15 @@ These methods revel several possible advantage compared to other reinforcement l
 Sarsa, and conventional Actor-Critic methods.
 Experiments are performed on dynamic maze problems and results 
 show that the two novel algorithms can outperform previously known reinforcement learning algorithms
-				
+
+--->
+	
+    
+    
+<!---
+
+kick ass real live applications
+
 Reinforcement Learning (RL) is defined as a Machine Learning method. 
 It is a very general framework for learning sequential decision making tasks.
 It has the particularity that it is used when we want to repeat iteratively action to learn. 
@@ -84,70 +163,10 @@ For example, the state space is very large in the game of Alpha GO,
 environment cannot be fully observed in Poker game and there are lots of agents 
 interact with each other in the real world.
 
+--->
 
-
 			
-REMARKS:
-
-* Need more citations (let say around 10)
-	- you dont need to read the whole papers, you can see to what the papers you read refer to themselve and use thiss
-	- read abstracts and quickly check some facts
-* I dont understand what you mean by 
-	"Reinforcement Learning (RL) are sometimes combined with ensemble methods to do best and good thinks in a short time."
-	Explain inother way
-* It is good to introduce what we did in this paper (second paragraph), but do this in the last paragraphs.
-	This way there is a fluent transition into the method section
-* Make the paragraph about ensemble methods bigger, explain more what it is and what the advantages and disadvantages are
-* In paragraph about other work you say:
-	"The only difference that it do not have the same method as our"
-	Exactly explain the differences and the consequences of these differences
-* also highlight that they make an ensemble of multiple agents and we did an ensemble within the same agent
-
-* you say:
-	"The purpose of applying ensemble methods on games to show that the learning speed is faster. "
-	Did they also observe this after the experiments?
-	if so, say that they concluded or observed an increase in learning speed
-	I not, say they did not observe that, even though they expected it to improve the learnign speed, explain why
-	
-* In the last paragraph you tell about what they did, that is good, but you also have to talk about the conclusions they found
-	- In general you should do
-		+ repeat the main question they were asking themselve 
-		+ shortly explain the experimental setup, how they solved this question
-		+ Give the conclusion they found an explain furhter relevant stuff for our paper
-		
-* Personally I would also like to see these questions answered when I read the introduction
-	- What is the advantage of RL over other machine learning methods
-		+ how does it differ with other methods
-		+ for what problems is RL the ideal method
-		+ for what problems would it be better to use another machine learning method
-	- Give some real live high impact applications or examples where RL learning is implemented 
-		+ these things can be fancy, we want to excite the reader with these things
-	- Explain the disadvantages of RL and end with and highlight that the learning speed can be slow for complex programs
-		+ you can look up some real number to give an idea
-	- previous part could be followed with an introduction to ensemble methods and how they try to solve this learning speed problem
-		+ explain what the concept behind it is 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-	References
+# References
 			
 	[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
 	[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
