@@ -20,4 +20,6 @@
 * Small maze
     - Very similar results
         + within standard deviation
-    - we can tell something about the rank voting that there is still a minor bug that could have influence 
+    - we can tell something about the rank voting that there is still a minor bug that could have influence
+    - variation of parameters
+        + gamma 
