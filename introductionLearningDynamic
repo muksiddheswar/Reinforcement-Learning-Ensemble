@@ -5,7 +5,7 @@ Software agents need to learn from experience which actions to take in an enviro
 The interactions and decisions the agent takes depend on the state of the environment.																
 In return the environment provides to the agent a reward which might be positve or negative. 
 The agent seeks, through iterative experiences the optimal solution by  maximizes the sum of rewards over time.
-Reinforcement Learning (RL) are sometimes combined with ensemble methods to do best and good thinks in a short time. 
+Ensemble methods are often combined with Reinforcement Learning (RL) algorithms to have a good return. 
 And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithms in Reinforcement Learning".
 			
 Into the present paper we will show that several ensemble methods such as: 
@@ -40,7 +40,16 @@ These comparaison are made on  different maze tasks and the aim is to know wheth
 a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
 an algorithm perform better than others. 
 			
-			
+Stefan Fauber and Friedhelm Schwenker, in Neural Network Ensembles in Reinforcement Learning[3], propose a meta-algorithm to learn 
+state-action values in a Neural Network Ensemble, fromed multi agent. The algorithm is evaluate on a generalized maze problem and on SZ-Tetris.
+And  the  evaluations methods, like Temporal-Difference or SARSA, produce good results for problems where the Markov property holds contrary 
+to the methods based ona temporal-difference.
+
+Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], describes two novel
+Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). both algorith use TD(λ)-methods to learn 
+state value-function. but the difference between them is that QV-learning uses the Q-learning to learn Q-values and  use learning automaton to update actor.
+These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, Sarsa, and conventional Actor-Critic methods.
+Experiments are performed on dynamic maze problems and results show that the two novel algorithms can outperform previously known reinforcement learning algorithms
 				
 			
 			
@@ -108,3 +117,5 @@ REMARKS:
 			
 			[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
 			[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
+			[3]  Stefan Fauber and Friedhelm Schwenker. Neural Network Ensembles in Reinforcement Learning
+			[4]  Marco A. Wiering and Hado van Hasselt. Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods
