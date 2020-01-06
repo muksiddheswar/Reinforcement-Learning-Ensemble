@@ -1,5 +1,6 @@
+# Reinforcement learning
 
-# Q-learning
+## Q-learning
 
 Q-learning is an off-policy, temporal difference (TD) reinforcement learning algorithm that learns by updating a Q-function.
 This action-value function Q directly approximates the optimal action-value function $Q^*$ and it does this independent of the policy that is being followed. 
@@ -16,7 +17,7 @@ as long as  each state-action pair is visited an infinite number of times (wieri
 However, Q-learning combined with function approximators, such as neural networks, have been observed to diverge (wiering 2007).
 
 
-# SARSA
+## SARSA
 
 Like Q-learning, 
 SARSA is temporal difference (TD) reinforcement learning algorithm that learns the action-value Q-function (wiering 2007). 
@@ -90,7 +91,7 @@ the greedy policy (which can be arranged, for example, with "-greedy policies by
 
 --->
 
-# Actor-Critic
+## Actor-Critic
 
 The Actor-Critic (AC) is an temporal difference, on-policy learning algorithm.
 Where SARSA and Q-learning only keep track on the Q-function,
@@ -170,7 +171,7 @@ tabular representations [4].
 
 --->
 
-# QV-learning
+## QV-learning
 
 QV-learning (wiering 2008[6]) is very similar to Actor-Critic.
 It is also a learning method that learns a state value-function V with TD method, 
@@ -250,7 +251,7 @@ by Q(s t , a t ) in QV-learning.
 
 
 
-# ACLA (Actor-Critic Learning Automaton)
+## ACLA (Actor-Critic Learning Automaton)
 
 Actor-Critic Learning Automaton (ACLA)(wiering 2008[6]) is an on-policy learning algorithm that learns a state value-function V and Actor function P.
 After each experience 
@@ -376,7 +377,9 @@ exploration was used [6].
 
 --->
 
-# Majority voting
+# Ensemble algorithms in RL
+
+## Majority voting
 
 Each of the n RL algorithms defines what it thinks to be the best action.
 Majority voting will transform these best actions into preferences in the following way:
@@ -418,7 +421,7 @@ select the action which is preferred by most algorithms.
 
 --->
 
-# Rank voting
+## Rank voting
 
 Preference values of the ensemble are give by:
 
@@ -450,7 +453,7 @@ of the ensemble are:
 
 --->
 
-# Boltzmann multiplication
+## Boltzmann multiplication
 
 Boltzmann multiplication calculates the ensemble preferences by multiplying for each action the action-selection probabilities given by the RL algorithms:
 
@@ -485,7 +488,7 @@ issue in our experiments.
 
 --->
 
-# Boltzmann addition
+## Boltzmann addition
 
 The formula  of Boltzmann addition looks very similar to Boltzmann multiplication,
 with the product being replaced by a sum:
