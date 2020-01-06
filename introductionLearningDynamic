@@ -30,7 +30,8 @@ These two methods must be combined to the policy function
 and have been be applied to the simple pencil-and-paper game (Tic-Tac-Toe ). 
 They showed that an ensemble of three agents outperforms a single agent. 
 Furthermore, they performed an experiment to learn the shortest path on  a 20×20 maze.
-The purpose of applying ensemble methods on games to show that the learning speed is faster. 
+The purpose of applying ensemble methods on games is to show that the learning speed is faster 
+and from that they concluded or observed an increase in learning speed. 
 			
 Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2]
 do not combine Methodes and Reinforcement Learning (RL) algorithsms.
@@ -70,11 +71,13 @@ REMARKS:
 	"The only difference that it do not have the same method as our"
 	Exactly explain the differences and the consequences of these differences
 * also highlight that they make an ensemble of multiple agents and we did an ensemble within the same agent
+
 * you say:
 	"The purpose of applying ensemble methods on games to show that the learning speed is faster. "
 	Did they also observe this after the experiments?
 	if so, say that they concluded or observed an increase in learning speed
 	I not, say they did not observe that, even though they expected it to improve the learnign speed, explain why
+	
 * In the last paragraph you tell about what they did, that is good, but you also have to talk about the conclusions they found
 	- In general you should do
 		+ repeat the main question they were asking themselve 
