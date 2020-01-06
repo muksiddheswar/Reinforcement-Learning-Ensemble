@@ -439,6 +439,16 @@ exploration was used [6].
 
 # Ensemble algorithms in RL
 
+Combining single classifiers for which the errors are not strongly correlated can lead to a higher accuracy than what is available for a single classifier.
+With this in mind, 
+ensemble methods have been used in reinforcement learning to combine value functions stored by function approximators (wiering 2008 [14], [15], [16], [17]).
+However, only Rl algorithms with the same value function can be combined in this way.
+In our case, want to combine RL methods with different value function and policies (e.g. Q-learning and ACLA).
+It is possible however, 
+to combine the different policies that were derived from distinct value functions.
+Next, we will describe four ensemble methods, designed by (Wiering 2008), that combine  policies and also take into account exploration. 
+
+
 ## Majority voting
 
 Each of the n RL algorithms defines what it thinks to be the best action.
