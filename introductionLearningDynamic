@@ -17,6 +17,14 @@ We show  experiments on five maze problems of varying complexity.
 			
 Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
 they perform learning speed and final performance  when applied for solving different control problems.
+Majority Voting (VM), this one combine the best action of each algorithm and  its ﬁnal decision is based on
+the number of times that an action is preferred by each algorithm. 
+Rank Voting (RV), this another one lets each algorithm rank the different actions and combines these rankings to 
+select a ﬁnal action.
+Boltzmann mulplication(BM), uses Boltzmann exploration for each algorithm and multiplies the Boltzmann probabilities
+of each action computed by each algorithm.
+and Boltzmann Addition(BA), this one is similar to Boltzmann mulplication(BM) but instead to multiplie it adds the
+Boltzmann probabilities of actions.
 						
 In another paper such as  Ensemble Methodes for Reinforcement Learning with Function Approximation[1], 
 ensemble methods have been combined with Reinforcement Learning (RL) algorithsms.
