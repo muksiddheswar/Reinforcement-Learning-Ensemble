@@ -761,7 +761,7 @@ $o_{t+1}:$ observation
 
 $\eta:$ normalization factor
 
-$T(s',a_t,s):$ transition function that maps the state-action pairs to a probability function over predecessor states.
+$T(s',a_t,s):$ transition function that maps the state-action pairs to a probability function over successor states.
 
 Since there are to many states for tabular expression,
 a neural network with 20 sigmoidal hidden neurons was used as function approximator.
