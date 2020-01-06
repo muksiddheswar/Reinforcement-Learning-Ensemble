@@ -522,6 +522,9 @@ For the second to fifth maze,
 complexity was increased by adding different dynamic elements to the maze.
 To circumvent the combination explosion that would occur in a tabular expression,
 neural networks were used as function approximators.
+In each tile of the maze, the agent can initiate 4 actions: going North, East, South or West.
+These actions are noisy,
+meaning that every time an action is taken, there is a 20% chance that the agent performs a random action instead.
 For each maze, the rewards were given in the following way.
 If the agent moves into the goal tile, 
 it receives a reward of 100.
@@ -529,8 +532,13 @@ When it tries to move into a wall or border,
 it will receive a reward of -2 and remain in the same place (state is not changed).
 For every other move (moving from one tile to the next),
 the agent receives a reward of -0.1.
-Even though it did not collide with a wall or border, 
-it was given a negative score to discourage it from wandering around.
+Even though it does not collide with a wall or border, 
+it gets a negative score to discourage it from wandering around.
+An agent learns in different trials.
+Such trial starts with the agent in the starting position 
+and ends when it reaches the goal positions 
+or has wandered for 1000 consecutive action without reaching the goal.
+
 
 <!---
 
@@ -557,27 +565,27 @@ approximators.
 
 ## Small Maze experiment
 
-wiering 2008
+The first experiment was the least complex,
+so that the agent could use tabular expression for the different state-action pairs.
+We implemented Sutton's Dyna maze,
+which consist of 54 tiles (6 rows and 9 columns).
+The maze also includes 7 walls, a starting and goal, all in fixed position (Fig. \ref{simpleMaze}).
 
-* Sutton's Dyna maze (figure)
-* 6 x 9  states
-* 4 actions (N E S W)
-    - stochastic noisy actions (20 percent random action)
-* from S to G as soon as possible
-* rewards
-    - G = 100
-    - wall/ border = -2 (no change in state)
-    - else = -0.1
-* max 1000 actions for one trial or earlier if goal reached
-* tabular representation
-* learning rates, discount factors, and greediness (inverse of the temperature) taken from paper
-* cumulative reward and final reward
-* parameters from paper
-* They optimized single RL algorithms final performance (tested wide range of parameters)
-    - discount factor big effect
-    - otherwise unfair comparison
-* ensemble methods used parameters of individually optimized algorithms
-    - only Temperature or greediness needed to be set
+![Sutton's Dyna maze \label{simpleMaze}](img/simpleMaze.png)
+ 
+In order to compare our results with those of (wiering 2008),
+we used the same learning rates, discount factors and greediness (inverse of Boltzmann temperature) parameters.
+In their paper, they explain how they tested a wide range of parameters 
+to optimize each of the five RL algorithms final performance (by evaluating the average reward).
+They wanted to compare the best version of each algorithm,
+which was not possible if the same parameters were used.
+For the ensemble methods, they used the same parameters as were determined for the single RL algorithms.
+(wiering 2008) observed the discount factor to have a major impact on the final and cumulative score.
+For the SARSA method, discount factors 0.90 and 0.95,
+and for the ACLA method, discount factors 0.99 and 0.90
+were compared to each other.
+We wanted to confirm these findings, 
+so we did simulations with the same discount factors.
     
 <!---
 
