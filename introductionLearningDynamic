@@ -2,24 +2,29 @@
 																									INTRODUCTION 
 						Reinforcement Learning (RL) is a technology that consist for a agent (robot, etc.), to learn actions to take, from experiences. The agent interact with his environment 	and  takes decisions depending on its current state.																
 			In return the environment provides to the agent a reward which might be positve or negative. The agent seeks, through iterative experiences the optimal solution by  maximizes the sum of rewards over time.
-			Reinforcement Learning (RL) sometimes are combined with  algorithms to do best and good thinks in a short time. And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithm And  Reinforcement".
+			Reinforcement Learning (RL) sometimes are combined with  ensemble methods to do best and good thinks in a short time. And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithms in Reinforcement Learning".
 			
 			Into the present paper we will show that several ensemble methods such as: Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
 			combine multiple different Reinforcement Learning (RL) algorithms which are: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, and AC Learning Automaton
 			in a single agent and the aim is to perform learning speed and final performance. We show  experiments on five maze problems of varying complexity.
 
 			
-			Ensemble methods are very powerful and appropriate algorithms in the sense that when combined with Reinforcement Learning (RL) they perform learning speed and final performance 
-			Reinforcement Learning (RL) algorithms.
+			Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms they perform learning speed and final performance 
+			when applied for solving different control problems.
 			
 			
-			Similarly we are confronted with another  paper namely: Ensemble Methodes for Reinforcement Learning with Function Approximation[1]. 
-			In this paper ideas are the same like the  work that we have  elaborated with the only difference that it do not have the same method as our.
-			It purpose theTemporal-Difference(TD) and  Residual-Gradient(RG) update methods as well as a policy function. These two methods must be combine 
-			to the policy function and must be applied to the simple pencil-and-paper game (Tic-Tac-Toe ). Further to learn the shortest path on  a 20×20 maze.
-			The main purpose of applying this on games to show that the learning speed is faster. 
+			In another paper such as  Ensemble Methodes for Reinforcement Learning with Function Approximation[1] ensemble methods have been combined with Reinforcement Learning (RL) algorithsms.
+  			In this paper ideas are the same like the  work that we have  elaborated with the only difference that it do not have the same method as our. 
+			Also In this paper they describe several ensemble methods that combine multiple reinforcement learning algorithms for multiple agents.
+			For that theTemporal-Difference(TD) and  Residual-Gradient(RG) update methods as well as a policy function have been used . These two methods must be combine 
+			to the policy function and must be applied to the simple pencil-and-paper game (Tic-Tac-Toe ) to how that an ensemble of three agents outperforms a single agent. 
+			Further to learn the shortest path on  a 20×20 maze.The main purpose of applying this on games to show that the learning speed is faster. 
 			
-			In this Similar paper At the end we also found that ensemble methods outperform the single action selection methods, but they used an ensemble of different agents and our one used single agents..
+			Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2] do not combine Methodes and Reinforcement Learning (RL) algorithsms.
+			This paper compare new Reinforcement Learning (RL) algorithsms such as QV2 with others Reinforcement Learning (RL) algorithsms well known as: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning,  Actor-Critic.
+			These comparaison are made on  different maze tasks and the aim is to know whether there exit a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
+			an algorithm perform better than others. 
+			
 			
 				
 			
@@ -54,3 +59,4 @@
 			References
 			
 			[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
+			[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
