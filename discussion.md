@@ -16,6 +16,12 @@
     - numerical errors
     - normal multiple iteration before the forward and backward propagation
     - something with experience replay
+
+EXPLANATION    
+for the lack of clarity for the NN: what we did: Weights were updated after each move using gradient descent for one iteration
+They were not explicit on how the weight were updates in the neuro net so we assumed what IU just said in the previous message
+However they could also have applied multiple gradient descent iterations after each move
+or maybe they used action replay as in "Human-level control through deep reinforcement learning" from DeepMind where actions, states and rewards are stored in memory and every so often, the weights are updated by learning from the experiences stored in memory
     
 * Small maze
     - Very similar results
