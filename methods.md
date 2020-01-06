@@ -102,9 +102,9 @@ An experience is defined as the sequence ($(s_t, a_t, r_t, s_{t+1})$).
 After each experience,
 the Critic and Actor get updated as follows [wiering 2008[11]]:
 
-$$ Critic: V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
+$$ \text{Critic: } V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
 
-$$ Actor: P(s_t, a_t) := P(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
+$$ \text{Actor: } P(s_t, a_t) := P(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
 
 Where $\beta$ is the learning rate of the Critic 
 and $\alpha$ the learning rate of the Actor.
@@ -184,7 +184,7 @@ $$ V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) )   $$
 The update for the Q-function is similar to the Actor update,
 but the $- V(s_t)$ at the end is replaced by $- Q(s_t, a_t)$:
 
-$$ Qvalue: Q(s_t, a_t) := Q(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - Q(s_t, a_t))$$
+$$ \text{Qvalue: } Q(s_t, a_t) := Q(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - Q(s_t, a_t))$$
 
 
 
@@ -512,13 +512,25 @@ The preference values of the ensemble are:
 # Experiments
 
 We compared five different RL algorithms (Q-learning, SARSA, Actor-Critic, QV-learning, ACLA) with each other and with four ensemble methods (Majority Voting, Rank Voting, Boltzmann Multiplication, Boltzmann Addition).
-The agents had to solve five different maze tasks of varying complexity.
+The goal for the agents was to solve five different maze tasks of varying complexity,
+In each maze, the agent starts at a certain starting position and needs to reach another goal position.
+The dominating objective was to move with each step closer to the goal.
 For the first experiment,
-the agents learned to solve a small base where start, goal and walls were in static position. To do this, they combined RL algorithms with a tabular expression.
+the agents learned to solve a small base where start, goal and walls were in static position. 
+To do this, they combined RL algorithms with a tabular expression.
 For the second to fifth maze,
-different dynamic elements were added to the maze.
+complexity was increased by adding different dynamic elements to the maze.
 To circumvent the combination explosion that would occur in a tabular expression,
 neural networks were used as function approximators.
+For each maze, the rewards were given in the following way.
+If the agent moves into the goal tile, 
+it receives a reward of 100.
+When it tries to move into a wall or border,
+it will receive a reward of -2 and remain in the same place (state is not changed).
+For every other move (moving from one tile to the next),
+the agent receives a reward of -0.1.
+Even though it did not collide with a wall or border, 
+it was given a negative score to discourage it from wandering around.
 
 <!---
 
@@ -543,3 +555,76 @@ approximators.
 
 --->
 
+## Small Maze experiment
+
+wiering 2008
+
+* Sutton's Dyna maze (figure)
+* 6 x 9  states
+* 4 actions (N E S W)
+    - stochastic noisy actions (20 percent random action)
+* from S to G as soon as possible
+* rewards
+    - G = 100
+    - wall/ border = -2 (no change in state)
+    - else = -0.1
+* max 1000 actions for one trial or earlier if goal reached
+* tabular representation
+* learning rates, discount factors, and greediness (inverse of the temperature) taken from paper
+* cumulative reward and final reward
+* parameters from paper
+* They optimized single RL algorithms final performance (tested wide range of parameters)
+    - discount factor big effect
+    - otherwise unfair comparison
+* ensemble methods used parameters of individually optimized algorithms
+    - only Temperature or greediness needed to be set
+    
+<!---
+
+wiering 2008
+
+The different ensemble methods: majority voting, rank
+voting, Boltzmann addition, and Boltzmann multiplication, are
+compared to the 5 individual algorithms: Q-learning, Sarsa,
+AC, QV-learning, and ACLA. We performed experiments with
+Sutton’s Dyna maze shown in Figure 1(A). This simple maze
+consists of 9 × 6 states and there are 4 actions; north, east,
+south, and west. The goal is to arrive at the goal state G as
+soon as possible starting from the starting state S under the
+influence of stochastic (noisy) actions. We kept the maze small,
+since we want to compare the results with the experiments on
+the more complex maze tasks, which would otherwise cost too
+much computational time.
+
+The reward for arriving at the goal
+is 100. When the agent bumps against a wall or border of
+the environment it stays still and receives a reward of -2.
+For other steps the agent receives a reward of -0.1. A trial
+is finished after the agent hits the goal or 1000 actions have
+been performed. The random replacement (noise) in action
+execution is 20%. This reward function and noise is used in
+all experiments of this paper.
+
+We used a tabular representation and first performed simu-
+lations to find the best learning rates, discount factors, and
+greediness (inverse of the temperature) used in Boltzmann
+exploration. All parameters were optimized for the single RL
+algorithms, where they were evaluated using the average re-
+ward intake and the final performance is optimized. Although
+in general it can cause problems to learn to optimize the
+discounted reward intake while evaluating with the average
+reward intake, for the studied problems the dominating ob-
+jective is to move each step closer to the goal, which is
+optimized using both criteria if the discount factor is large
+enough. We also optimize the discount factors, since we found
+that they had a large influence on the results. If we would
+have always used the same discount factor for all algorithms,
+the results of some algorithms would have been much worse,
+and therefore it would be impossible to select a fair discount
+factor. Since we evaluate all methods using the average reward
+criterion, the different discount factors do not influence the
+comparison between algorithms. The ensemble methods used
+the parameters of the individually optimized algorithms, so
+that only the ensemble’s temperature had to be set.
+
+--->
