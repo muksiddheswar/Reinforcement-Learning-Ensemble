@@ -801,3 +801,50 @@ better performance at the end than the single RL algorithms
 and initially have a faster learning speed.
 
 --->
+
+# Generalized maze
+
+The last experiment combined the problem of a maze with dynamic obstacles and a maze with dynamic goals positions into a generalized maze experiment (wierling 2008 [23]).
+In this maze,
+the goal and obstacles are positioned at random positions at the start each trial.
+A neural network with 100 sigmoidal hidden units receives 162 (54x3) input values,
+54 to describe the agent position,
+54 to describe the obstacle positions,
+and 54 to describe the goal position.
+
+
+<!---
+
+wiering 2008
+
+In this last maze experiment, we use the same small
+maze as before, but now the goal and walls are placed at
+a different location in each trial. This is what Werbos calls
+the “Generalized Maze” [23] experiment. To deal with this, a
+neural network function approximator receives the position of
+the agent, goal and the dynamic walls as input. Therefore there
+are 54 × 3 inputs. A simulation lasts for 15,000,000 learning
+steps and we measure performance after each 750,000 steps.
+The feedforward neural networks have 100 sigmoidal hidden
+units.
+Table V shows the final and total performance of the differ-
+ent algorithms. Here Q-learning obtains the best final results,
+but the majority voting ensemble has the best overall learning
+performance. It is surprising that Sarsa obtains much worse
+results than the other algorithms, even though we optimized all
+its learning parameters. We also experimented with a majority
+voting ensemble consisting of five Q-learning algorithms. The
+performance of this ensemble was 7.20 ± 0.16 for the final
+performance and 103.4±0.9 for the total learning performance,
+so this ensemble reaches the best final performance, and its
+learning speed is almost significantly better than the majority
+voting ensemble using different RL algorithms. This is the
+only experiment where an ensemble consisting of the same
+best single RL algorithm leads to a significantly better final
+performance compared to the best ensemble consisting of
+different single RL algorithms. This results can be explained
+by the fact that in this problem Q-learning performs much
+better than the other algorithms. At the end of the learning
+trial Q-learning outperforms the best ensembles, although the
+ensembles initially have a faster learning speed.
+--->
