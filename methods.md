@@ -762,3 +762,42 @@ algorithm. The best ensembles reach a better performance at
 the end than the single RL algorithms.
 
 --->
+
+# Maze dynamic goal positions
+
+The fourth maze is very similar to the third maze.
+Instead of dynamic obstacles, 
+there is a dynamic goal position.
+Obstacles and starting position are placed as in Sutton's Dyna maze.
+This time, a neural network with 20 sigmoidal hidden units and a tuple of length 108 as input was used as function approximator.
+This time 54 values represent the agent position,
+and the other 54 values the goal position. 
+
+<!---
+
+wiering 2008
+
+In this fourth maze experiment, we use the same small
+maze as before (see Figure 1(A)) where the starting position
+is indicated by S, but now the goal is placed at a different
+location in each trial. To deal with this, we use a neural
+network function approximator that receives the position of
+the goal as input. Therefore there are 54 × 2 inputs, that
+indicate the position of the agent and the position of the goal.
+A simulation lasts for 3,000,000 learning steps and we measure
+performance after each 150,000 steps. We used feedforward
+neural networks with 20 sigmoidal hidden units.
+best final performance and also has the best overall learning
+performance. We also experimented with a majority voting
+ensemble consisting of five differently initialized Sarsa algo-
+rithms. The performance of this ensemble was 11.02 ± 0.22
+for the final performance and 176.7 ± 4.9 for the total learning
+performance. This shows again that a combination of different
+RL algorithms in an ensemble learns faster than an ensemble
+consisting of the best single RL algorithm, although an en-
+semble of the same RL algorithm can also increase the final
+performance of that algorithm. The best ensembles reach a
+better performance at the end than the single RL algorithms
+and initially have a faster learning speed.
+
+--->
