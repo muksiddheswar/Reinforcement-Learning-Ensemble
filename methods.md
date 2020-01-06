@@ -563,6 +563,7 @@ approximators.
 
 --->
 
+
 ## Small Maze experiment
 
 The first experiment was the least complex,
@@ -637,7 +638,39 @@ that only the ensemble’s temperature had to be set.
 
 --->
 
-# Partially observable maze
+## Neural networks as universal function approximators
+
+Traditionally RL algorithms use tabular expression to represent a state-function or action-function.
+In Q-learning for example,
+a Q-value is remembered for each state-action combination.
+Each time the agent performs an action, gains experience, 
+the Q-value of that specific state-action pair is updated.
+For complex games however, there is an explosion of state-action possibilities.
+Chess for example, is estimated to have more than $10^{50}$ chess-board configurations.
+Not only do we lack the memory to store such a table,
+we would need more time than the age of the universe to explore all possible states.
+Therefore function approximators are used to approximate such state(-action) functions,
+which try to capture the essence, most essential concepts in order to maximize reward.
+Neural networks are universal function approximators,
+this mean that they can be made to learn any mathematical function, given sufficient learning data.
+For the more complex mazes of experiments 2 to 5,
+we implemented a neural network that was trained after each move of the agent.
+Weight were updated for one iteration by gradient descent.
+And 1 forward and backward propagation was performed.
+
+
+
+<!---
+
+https://www.freecodecamp.org/news/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc/
+
+http://www.stokastik.in/neural-networks-function-approximator/
+
+https://www.practicalai.io/teaching-a-neural-network-to-play-a-game-with-q-learning/
+
+--->
+
+## Partially observable maze
 
 For the partially observable maze experiment,
 we started from the same Sutton's Dyna maze.
@@ -717,7 +750,7 @@ good performance much earlier.i
 
 --->
 
-# Maze with dynamic obstacles
+## Maze with dynamic obstacles
 
 For third experiment,
 4 to 8 obstacles (walls) were generated at random locations at the start of each trial.
@@ -763,7 +796,7 @@ the end than the single RL algorithms.
 
 --->
 
-# Maze dynamic goal positions
+## Maze dynamic goal positions
 
 The fourth maze is very similar to the third maze.
 Instead of dynamic obstacles, 
@@ -802,7 +835,7 @@ and initially have a faster learning speed.
 
 --->
 
-# Generalized maze
+## Generalized maze
 
 The last experiment combined the problem of a maze with dynamic obstacles and a maze with dynamic goals positions into a generalized maze experiment (wierling 2008 [23]).
 In this maze,
