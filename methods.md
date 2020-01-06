@@ -716,3 +716,49 @@ within 60,000 learning steps, but the best ensembles reach a
 good performance much earlier.i
 
 --->
+
+# Maze with dynamic obstacles
+
+For third experiment,
+4 to 8 obstacles (walls) were generated at random locations at the start of each trial.
+Start and goal positions were fixed in the same place as Sutton's Dyna maze.
+If no possible path exists from start to goal,
+the agent would not have to solve it and an new maze was generated instead.
+The agent needed to learn the knowledge of a path planner.
+For this a neural network was implemented with 60 sigmoidal hidden units.
+As input, the network received a tuple of length 108 (since there are 54 tiles in the maze and we want to know from each tile whether an agent or wall is on it).
+54 of them depict the agent position (0 or 1 for each tile),
+and 54 depict the wall positions (0 or 1 for each tile).
+
+<!---
+
+wiering 2008
+
+We also compared the algorithms on a dynamic maze, where
+in each trial there are several obstacles at random locations (see
+Fig. 1(b)). In order to deal with this task the agent uses a neural
+network that receives as inputs whether a particular state-cell
+contains an obstacle (1) or not (0). The neural network uses
+2 × 54 = 108 inputs including the position of the agent and
+60 sigmoidal hidden units. At the start of each new trial there
+are between 4 and 8 obstacles generated at random positions
+and it is made sure that a path to the goal exists from the
+fixed starting location S. Since there are many instances of
+this maze, the neural network has to learn the knowledge of a
+path planner. A simulation lasts for 3,000,000 learning steps
+and we measure performance after each 150,000 steps.
+Table III shows the final and total performance of the
+different algorithms. The Boltzmann multiplication ensemble
+outperforms the other algorithms on this problem: it reaches
+the best final performance and also has the best overall
+learning performance. We also experimented with a Boltzmann
+multiplication ensemble consisting of five differently initial-
+ized Q-learning algorithms. The performance of this ensemble
+was 6.87 ± 0.22 for the final performance and 117.0 ± 2.7
+for the total learning performance. This shows again that
+combining different RL algorithms in an ensemble performs
+better than an ensemble consisting of the best single RL
+algorithm. The best ensembles reach a better performance at
+the end than the single RL algorithms.
+
+--->
