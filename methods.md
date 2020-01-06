@@ -636,3 +636,83 @@ the parameters of the individually optimized algorithms, so
 that only the ensemble’s temperature had to be set.
 
 --->
+
+# Partially observable maze
+
+For the partially observable maze experiment,
+we started from the same Sutton's Dyna maze.
+However in this case, the starting position varies and is unknown to the agent.
+Additionally, the agent can only observe part of the maze.
+After each action,
+it receives an observation,
+a tuple of four values (representing the tiles North, South, East and West of the agent).
+for example, if there is a wall to the North, a border to the East and empty tiles in the other directions,
+the observation tuple looks like (1,0,1,0).
+In addition to the 20 % noise of action selection,
+there is also a 10 % observational noise for each independent tile. 
+Because the position is unknown to the agent,
+Markov localization is used to keep track of a believe state.
+Initially this believe state has a uniform distribution over all the tiles without obstacle.
+Updates are performed as following:
+
+$$ b_{t+1}(s) = \eta P(o_{t+1}|s) \sum_{s'}T(s',a_t,s) b_t(s') $$
+
+$a_t:$ action at time t
+
+$b_t(s):$ believe state
+
+$o_{t+1}:$ observation
+
+$\eta:$ normalization factor
+
+Since there are to many states for tabular expression,
+a neural network with 20 sigmoidal hidden neurons was used as function approximator
+with the believe state as input.
+      
+<!---
+
+wiering 2008
+
+In this experiment we use Markov localization and neural
+networks to solve a partially observable Markov decision
+process in the case where the model of the environment is
+known. We use Markov localization to track the belief state (or
+probability distribution over the states) of the agent given an
+action and observation after each time-step. This belief state is
+then the input for the neural network. We used 20 sigmoidal
+hidden neurons in our experiments, and the maze shown in
+Figure 1(A) with the goal indicated by P and each state can be
+a starting state. The initial belief state is a uniform distribution
+where only states that are not obstacles get assigned a non-zero
+belief. After each action a t the belief state b t (s) is updated
+with the observation o t+1 :
+
+...
+
+where η is some normalization factor. The observations are
+whether there is a wall to the north, east, south, and west.
+Thus, there are 16 possible observations. We use 20% noise
+in the action execution and 10% noise for observing each
+independent wall (or empty cell) at the sides. That means that
+an observation is correct with probability 0.9 4 = 66%. Note
+that we use a model of the environment to be able to compute
+the belief state, and the model is based on the uncertainties in
+the transition and observation functions.
+
+We performed experiments consisting of 100,000 learning
+steps with a neural network representation and the Boltzmann
+exploration rule. For evaluation after each 5,000 steps we
+measured the average reward intake during that period. Table
+II shows that the Boltzmann multiplication ensemble method
+learns fastest in this problem. We also experimented with a
+Boltzmann multiplication ensemble consisting of five differ-
+ently initialized Q-learning algorithms. The performance of
+this ensemble was 9.61 ± 0.31 for the final performance and
+153.1 ± 8.0 for the total learning performance. This shows
+that combining different RL algorithms speeds up learning
+performance compared to an ensemble of the best single RL
+algorithm. All algorithms converge to a stable performance
+within 60,000 learning steps, but the best ensembles reach a
+good performance much earlier.i
+
+--->
