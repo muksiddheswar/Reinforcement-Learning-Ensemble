@@ -11,9 +11,12 @@ And it is in this logic that we have chosen to work on the one paper name " Ense
 Into the present paper we will show that several ensemble methods such as: 
 Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
 combine multiple different Reinforcement Learning (RL) algorithms which are: 
-Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, and AC Learning Automaton in a single agent and the aim is to perform learning speed and final performance. 
-We show  experiments on five maze problems of varying complexity.Also one interest think to know in this paper is that in this paper
-Reinforcement Learning (RL) algorithms combine are whith decision of methode instead to be combine by Q-value like methods in others papers.
+Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, 
+and AC Learning Automaton in a single agent and the aim is to perform learning speed and final performance. 
+We show  experiments on five maze problems of varying complexity.
+Also one interest think to know in this paper is that in this paper
+Reinforcement Learning (RL) algorithms combine are whith decision of methode instead 
+to be combine by Q-value like methods in others papers.
 
 			
 Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
@@ -50,23 +53,36 @@ These comparaison are made on  different maze tasks and the aim is to know wheth
 a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
 an algorithm perform better than others. 
 			
-Stefan Fauber and Friedhelm Schwenker, in Neural Network Ensembles in Reinforcement Learning[3], propose a meta-algorithm to learn 
-state-action values in a Neural Network Ensemble, fromed multi agent. The algorithm is evaluate on a generalized maze problem and on SZ-Tetris.
-And  the  evaluations methods, like Temporal-Difference or SARSA, produce good results for problems where the Markov property holds contrary 
+Stefan Fauber and Friedhelm Schwenker, in Neural Network Ensembles in Reinforcement Learning[3], 
+propose a meta-algorithm to learn state-action values in a Neural Network Ensemble, fromed multi agent. 
+The algorithm is evaluate on a generalized maze problem and on SZ-Tetris.
+And  the  evaluations methods, like Temporal-Difference or SARSA, 
+produce good results for problems where the Markov property holds contrary 
 to the methods based ona temporal-difference.
 
-Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], describes two novel
-Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). both algorith use TD(λ)-methods to learn 
-state value-function. but the difference between them is that QV-learning uses the Q-learning to learn Q-values and  use learning automaton to update actor.
-These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, Sarsa, and conventional Actor-Critic methods.
-Experiments are performed on dynamic maze problems and results show that the two novel algorithms can outperform previously known reinforcement learning algorithms
+Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], 
+describes two novel Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). 
+both algorith use TD(λ)-methods to learn state value-function. 
+but the difference between them is that QV-learning uses the Q-learning to learn Q-values 
+and  use learning automaton to update actor.
+These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, 
+Sarsa, and conventional Actor-Critic methods.
+Experiments are performed on dynamic maze problems and results 
+show that the two novel algorithms can outperform previously known reinforcement learning algorithms
 				
-Reinforcement Learning (RL) is defined as a Machine Learning method. It is a very general framework for learning sequential decision making tasks.
-It has the particularity that it is used when we want to repeat iteratively action to learn. it is example in learning Robot and  Alpha Go where 
-reinforcement Learning is use to reach the goal. Therefore, Machine Learning (ML) are use to perform a specific task without using explicit instructions by means of its statistical models.			
-Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. The problems we face in the real world can be extremely 
-complicated in many different ways and therefore a typical Reinforcement Learning (RL) algorithm has no clue to solve. For example, the state space is very large in the game of Alpha GO,
-environment cannot be fully observed in Poker game and there are lots of agents interact with each other in the real world.
+Reinforcement Learning (RL) is defined as a Machine Learning method. 
+It is a very general framework for learning sequential decision making tasks.
+It has the particularity that it is used when we want to repeat iteratively action to learn. 
+it is example in learning Robot and  Alpha Go where 
+reinforcement Learning is use to reach the goal. 
+Therefore, Machine Learning (ML) are use to perform a specific task without using 
+explicit instructions by means of its statistical models.			
+Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. 
+The problems we face in the real world can be extremely 
+complicated in many different ways and therefore a typical Reinforcement Learning (RL) algorithm has no clue to solve. 
+For example, the state space is very large in the game of Alpha GO,
+environment cannot be fully observed in Poker game and there are lots of agents 
+interact with each other in the real world.
 
 
 
