@@ -2,20 +2,6 @@
 
 * What is Reinforcement learning
     - how does it work in general
-    - some fancy real live applications
-    - explain basic ones (Q-learning, SARSA, Actor-Critic)
-    - explain advanced onces with paper backing (QV-learning,ACLA)
-    - function approximation for more complex tasks???
-
-* Ensemble methods
-    - How they did it in other papers
-    - How we do it differently (Concept behind it)
-    - Which algorithms used
-    - function approximation for more complex tasks???
-    
-* Work they did in our paper / transition to methods 
-
-
 <!---
 
 WHAT IS RL (GENERAL)
@@ -34,29 +20,74 @@ In return the environment provides to the agent a reward which might be positve 
 The agent seeks, through iterative experiences the optimal solution by  maximizes the sum of rewards over time.
 
 --->
+    - function approximation for more complex tasks
+        + Find some good source
+    - some fancy real live applications
+<!---
 
+kick ass real live applications
+
+Reinforcement Learning (RL) is defined as a Machine Learning method. 
+It is a very general framework for learning sequential decision making tasks.
+It has the particularity that it is used when we want to repeat iteratively action to learn. 
+it is example in learning Robot and  Alpha Go where 
+reinforcement Learning is use to reach the goal. 
+Therefore, Machine Learning (ML) are use to perform a specific task without using 
+explicit instructions by means of its statistical models.			
+
+--->
+    - explain basic ones (Q-learning, SARSA, Actor-Critic)
+        + Find some good sources
+    - explain advanced onces with paper backing (QV-learning,ACLA)
+<!---
+
+Paper about more advanced reinforcement algorithms
+
+Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2]
+do not combine Methodes and Reinforcement Learning (RL) algorithsms.
+This paper compare new Reinforcement Learning (RL) algorithsms such as QV2 with others Reinforcement Learning (RL) algorithsms 
+well known as: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning,  Actor-Critic.
+These comparaison are made on  different maze tasks and the aim is to know whether there exit 
+a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
+an algorithm perform better than others. 
+
+--->
+    
+<!---
+
+Paper about more advanced reinforcement algorithms
+
+Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], 
+describes two novel Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). 
+both algorith use TD(λ)-methods to learn state value-function. 
+but the difference between them is that QV-learning uses the Q-learning to learn Q-values 
+and  use learning automaton to update actor.
+These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, 
+Sarsa, and conventional Actor-Critic methods.
+Experiments are performed on dynamic maze problems and results 
+show that the two novel algorithms can outperform previously known reinforcement learning algorithms
+
+--->
+    - shortcomings
+<!---
+
+shortcomings
+
+Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. 
+The problems we face in the real world can be extremely 
+complicated in many different ways and therefore a typical Reinforcement Learning (RL) algorithm has no clue to solve. 
+For example, the state space is very large in the game of Alpha GO,
+environment cannot be fully observed in Poker game and there are lots of agents 
+interact with each other in the real world.
+
+--->
+* Ensemble methods
 <!--- 
 
 Transition to ENSEMBLE methods
 
 Ensemble methods are often combined with Reinforcement Learning (RL) algorithms to have a good return. 
 And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithms in Reinforcement Learning".
-
---->
-			
-<!---
-
-WHAT did our paper do , transition to methods
-
-Into the present paper we will show that several ensemble methods such as: 
-Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
-combine multiple different Reinforcement Learning (RL) algorithms which are: 
-Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, 
-and AC Learning Automaton in a single agent and the aim is to perform learning speed and final performance. 
-We show  experiments on five maze problems of varying complexity.
-Also one interest think to know in this paper is that in this paper
-Reinforcement Learning (RL) algorithms combine are whith decision of methode instead 
-to be combine by Q-value like methods in others papers.
 
 --->
 
@@ -66,17 +97,9 @@ What are ensemble methods and benefits
 
 Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
 they perform learning speed and final performance  when applied for solving different control problems.
-Majority Voting (VM), this one combine the best action of each algorithm and  its ﬁnal decision is based on
-the number of times that an action is preferred by each algorithm. 
-Rank Voting (RV), this another one lets each algorithm rank the different actions and combines these rankings to 
-select a ﬁnal action.
-Boltzmann mulplication(BM), uses Boltzmann exploration for each algorithm and multiplies the Boltzmann probabilities
-of each action computed by each algorithm.
-and Boltzmann Addition(BA), this one is similar to Boltzmann mulplication(BM) but instead to multiplie it adds the
-Boltzmann probabilities of actions.
 
 --->
-
+    - How they did it in other papers
 <!---
 
 paper on ensemble methods multi agents function approximation
@@ -98,22 +121,6 @@ and from that they concluded or observed an increase in learning speed.
 
 --->  
 
-
-<!---
-
-Paper about more advanced reinforcement algorithms
-
-Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2]
-do not combine Methodes and Reinforcement Learning (RL) algorithsms.
-This paper compare new Reinforcement Learning (RL) algorithsms such as QV2 with others Reinforcement Learning (RL) algorithsms 
-well known as: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning,  Actor-Critic.
-These comparaison are made on  different maze tasks and the aim is to know whether there exit 
-a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
-an algorithm perform better than others. 
-
---->
-
-
 <!--- 
 
 Function approximation with neural networks
@@ -125,45 +132,53 @@ And  the  evaluations methods, like Temporal-Difference or SARSA,
 produce good results for problems where theYeah keep workin Markov property holds contrary 
 to the methods based ona temporal-difference.
 
---->
-
+---> 
+    - How we do it differently (Concept behind it)
+        + find some good source material
+    - Which algorithms used
 <!---
 
-Paper about more advanced reinforcement algorithms
+Ensemble methods used in our paper
 
-Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], 
-describes two novel Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). 
-both algorith use TD(λ)-methods to learn state value-function. 
-but the difference between them is that QV-learning uses the Q-learning to learn Q-values 
-and  use learning automaton to update actor.
-These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, 
-Sarsa, and conventional Actor-Critic methods.
-Experiments are performed on dynamic maze problems and results 
-show that the two novel algorithms can outperform previously known reinforcement learning algorithms
+Majority Voting (VM), this one combine the best action of each algorithm and  its ﬁnal decision is based on
+the number of times that an action is preferred by each algorithm. 
+Rank Voting (RV), this another one lets each algorithm rank the different actions and combines these rankings to 
+select a ﬁnal action.
+Boltzmann mulplication(BM), uses Boltzmann exploration for each algorithm and multiplies the Boltzmann probabilities
+of each action computed by each algorithm.
+and Boltzmann Addition(BA), this one is similar to Boltzmann mulplication(BM) but instead to multiplie it adds the
+Boltzmann probabilities of actions.
 
 --->
+ * Work they did in our paper / transition to methods   
+<!---
+
+WHAT did our paper do , transition to methods
+
+Into the present paper we will show that several ensemble methods such as: 
+Majority Voting (VM), Rank Voting, Boltzmann mulplication(BM) and Boltzmann Addition(BA) 
+combine multiple different Reinforcement Learning (RL) algorithms which are: 
+Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning, 
+and AC Learning Automaton in a single agent and the aim is to perform learning speed and final performance. 
+We show  experiments on five maze problems of varying complexity.
+Also one interest think to know in this paper is that in this paper
+Reinforcement Learning (RL) algorithms combine are whith decision of methode instead 
+to be combine by Q-value like methods in others papers.
+
+--->
+
+
+
+
+
+
+
+
+
 	
     
     
-<!---
 
-kick ass real live applications
-
-Reinforcement Learning (RL) is defined as a Machine Learning method. 
-It is a very general framework for learning sequential decision making tasks.
-It has the particularity that it is used when we want to repeat iteratively action to learn. 
-it is example in learning Robot and  Alpha Go where 
-reinforcement Learning is use to reach the goal. 
-Therefore, Machine Learning (ML) are use to perform a specific task without using 
-explicit instructions by means of its statistical models.			
-Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. 
-The problems we face in the real world can be extremely 
-complicated in many different ways and therefore a typical Reinforcement Learning (RL) algorithm has no clue to solve. 
-For example, the state space is very large in the game of Alpha GO,
-environment cannot be fully observed in Poker game and there are lots of agents 
-interact with each other in the real world.
-
---->
 
 			
 # References
