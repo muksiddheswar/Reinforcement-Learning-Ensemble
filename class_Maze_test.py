@@ -10,7 +10,7 @@ class Maze:
         self.position = None
         self.walls=None
         self.goal = None
-        self.possibleActions= ["up","down", "right", "left"] #Always true
+        self.possibleActions= ["up","down", "right", "left"] # Always true
         
     def initSmallMaze(self):    
         '''
