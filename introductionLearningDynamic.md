@@ -29,17 +29,10 @@ The capture the most essential concepts in order to maximize reward.
 Neural networks are an example of such function approximator.
 
     - some fancy real live applications
-<!---
-
-kick ass real live applications
-
-it is example in learning Robot and  Alpha Go where 
-reinforcement Learning is use to reach the goal. 
-Therefore, Machine Learning (ML) are use to perform a specific task without using 
-explicit instructions by means of its statistical models.			
-
---->
-    - explain basic ones (Q-learning, SARSA, Actor-Critic)
+DeepMind's program AlphaZero is an interesting example that combines neural networks with reinforcement learning algorithms to learn chess.
+The program was given no domain knowledge except the rules and achieved a superhuman level within 24 hours.
+ 
+     - explain basic ones (Q-learning, SARSA, Actor-Critic)
         + Find some good sources
     - explain advanced onces with paper backing (QV-learning,ACLA)
 <!---
