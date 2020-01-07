@@ -1,10 +1,24 @@
+\documentclass[letterpaper]{article}
+\usepackage{natbib,alifexi}
+\usepackage{longtable}
+
+\title{Analysis of the paper ``Ensemble Algorithms in Reinforcement Learning''}
+\author{Jan van den Schilden$^{1}$, Nil Fernandez Lojo$^{1}$, Borel Kamdem$^{1}$ \and Siddheswar Mukherjee$^2$ \\
+\mbox{}\\
+$^1$Université Libre de Bruxelles, Belgium\\
+$^2$Vrije Universiteit Brussel, Belgium }
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
 This article presents the work of Wiering and van Hasselt in ``Ensemble
-Algorithms in Reinforcement Learning'' {[}reference{]}. Ensemble methods
+Algorithms in Reinforcement Learning'' \cite{wiering2008}. Ensemble methods
 merge multiple reinforcement learning (RL) algorithms into a single
 agent with the objectif of increasing the learning speed and the
 obtained reward. While ensemble methods have already been used in the
 context of reinforcement learning for representing and learning a single
-value function {[}references 14-16 in paper{]}, Wiering and van Hasselt
+value function \cite{singh1992, tham1995, sun1999}, Wiering and van Hasselt
 introduce a novel technique that combines the policy of each RL
 learning. The individual RL algorithms implemented were: Q-learning,
 Sarsa, Actor-Critic, QV-learning, and ACLA. The ensemble methods are
@@ -16,9 +30,9 @@ network was used for value functions approximation. We reimplemented
 their algorithms and obtained the same results for the first maze. For
 the other mazes, our neural network did not converge. Possible causes
 for this non-convergence are discussed in this article.
+\end{abstract}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 Reinforcement learning is a branch of machine learning in which software
 agents learn from interacting with their environment. It is a very
@@ -58,15 +72,15 @@ difference, on-policy learning algorithm. But where SARSA and Q-learning
 only keep track of a single Q-function, AC makes the distinction between
 a critic value function V that only depends on the state, and an Actor
 function which will map for each action the states to preference values.
-wiering(2007) explains a more recent and advanced on-policy QV-learning
+\cite{wiering2007} explains a more recent and advanced on-policy QV-learning
 method. This algorithm can be seen as mix between Actor-Critic and
 Q-learning. As Actor-Critc, it learn the state-value function V and an
 action-value function. But unlike Actor-Critic, it learns the Q-function
 for that. ACLA is another on-policy RL algorithm derived from
 Actor-Critic that learns a state value-function V and Actor function P.
 QV-learning and ACLA have been shown to outperform similar, more basic,
-RL algorithms (wiering2007) and QV-learning even scores higher in
-certain problem contexts than more recent RL methods (wiering2009).
+RL algorithms \cite{wiering2007} and QV-learning even scores higher in
+certain problem contexts than more recent RL methods \cite{wiering2009}.
 
 Reinforcement learning methods, however useful, can take many steps to
 learn. Ensemble methods are a powerful method to combine different
@@ -76,9 +90,9 @@ combine multiple reinforcement learning algorithms for multiple agents
 for which they used Temporal-Difference(TD) and Residual-Gradient(RG)
 update methods as well as a policy function. Other ensemble methods have
 been used in reinforcement learning to combine value functions stored by
-function approximators (wiering 2008 {[}14{]}, {[}15{]}, {[}16{]},
+function approximators (\cite{wiering2008} {[}14{]}, {[}15{]}, {[}16{]},
 {[}17{]}). However, only Rl algorithms with the same value function can
-be combined in this way. (Wiering2008) wanted to combine RL methods with
+be combined in this way. \cite{wiering2008} wanted to combine RL methods with
 different value functions and policies (e.g.~Q-learning and ACLA). It is
 possible however, to combine the different policies that were derived
 from distinct value functions. Some algorithms that perform this task
@@ -100,21 +114,9 @@ to 4 ensemble methods (Majority Voting, Rank Voting, Boltzmann
 multiplication, and Boltzmann Addition). To this end, they had to solve
 five mazes of varying complexity.
 
-\hypertarget{references}{%
-\section{References}\label{references}}
+\section{Methods}\label{methods}
 
-\begin{verbatim}
-[1]  Stefan FauBer and Friedhelm Schwenker. Ensemble Methods for Reinforcement Learning. with Function Approximation
-[2]  Marco A. Wiering and Hado van Hasselt. The QV Family Compared to Other Reinforcement Learning Algorithms
-[3]  Stefan Fauber and Friedhelm Schwenker. Neural Network Ensembles in Reinforcement Learning
-[4]  Marco A. Wiering and Hado van Hasselt. Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods
-\end{verbatim}
-
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
-
-\hypertarget{reinforcement-learning}{%
-\subsection{Reinforcement learning}\label{reinforcement-learning}}
+\subsection{Reinforcement learning}\label{reinforcement-learning}
 
 With reinforcement learning methods, agent are able to learn from
 interactions with their environment. We assume a Markov Decision Process
@@ -131,8 +133,7 @@ of an agent is to estimate the optimal policy \(\pi^*(s)\). With
 action is to receive the highest possible cumulative discounted reward
 in future states.
 
-\hypertarget{q-learning}{%
-\subsubsection{Q-learning}\label{q-learning}}
+\subsubsection{Q-learning}\label{q-learning}
 
 Q-learning is an off-policy, temporal difference (TD) reinforcement
 learning algorithm that learns by updating a Q-function. This
@@ -150,19 +151,16 @@ immediate reward of an action, but also future rewards that will be
 available in future states as a consequence of this action. The
 advantage of tabular Q-learning is that it will always converge to
 \(Q^*\). It does not matter what behavioral policy is used, as long as
-each state-action pair is visited an infinite number of times (wiering
-2007 {[}13{]}). However, Q-learning combined with function
+each state-action pair is visited an infinite number of times (\cite{wiering2007} {[}13{]}). However, Q-learning combined with function
 approximators, such as neural networks, have been observed to diverge
-(wiering 2007).
+\cite{wiering2007}.
 
-\hypertarget{sarsa}{%
-\subsubsection{SARSA}\label{sarsa}}
+\subsubsection{SARSA}\label{sarsa}
 
 Like Q-learning, SARSA is temporal difference (TD) reinforcement
-learning algorithm that learns the action-value Q-function (wiering
-2007). Unlike Q-learning, SARSA is on-policy, meaning that the
+learning algorithm that learns the action-value Q-function \cite{wiering2007}. Unlike Q-learning, SARSA is on-policy, meaning that the
 approximation of optimal \(Q^*\) values depend on the policy being
-followed (wiering 2007 {[}6{]}). An experience is defined as the
+followed (\cite{wiering2008} {[}6{]}). An experience is defined as the
 quintuple \((s_t, a_t, r_t, s_{t+1}, a_{t+1})\). This quintuple is what
 gave rise to the name SARSA (sutton 2018). After every transition,
 Q-values are updated by the following method:
@@ -172,62 +170,58 @@ Q-values are updated by the following method:
 As with tabular Q-learning, tabular SARSA converges towards \(Q^*\) if
 all state-action pairs are visited an infinite number of times.
 
-\hypertarget{actor-critic}{%
-\subsubsection{Actor-Critic}\label{actor-critic}}
+\subsubsection{Actor-Critic}\label{actor-critic}
 
 The Actor-Critic (AC) is an temporal difference, on-policy learning
 algorithm. Where SARSA and Q-learning only keep track on the Q-function,
-Actor-Critic will update both a Critic and Actor function (wiering 2008
+Actor-Critic will update both a Critic and Actor function \cite{wiering2008}
 {[}1{]}). The Critic function assigns values to the states, irrespective
 of the action chosen by the agent. The Actor function will for each
-action map the states to preference values (wiering 2008). An experience
+action map the states to preference values \cite{wiering2008}. An experience
 is defined as the sequence (\((s_t, a_t, r_t, s_{t+1})\)). After each
-experience, the Critic and Actor get updated as follows {[}wiering
-2008{[}11{]}{]}:
+experience, the Critic and Actor get updated as follows {[}\cite{wiering2008}{[}11{]}{]}:
 
-\[ \text{Critic: } V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) ) \]
+$$ \textrm{Critic: } V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
 
-\[ \text{Actor: } P(s_t, a_t) := P(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - V(s_t) ) \]
+$$ \textrm{Actor: } P(s_t, a_t) := P(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - V(s_t) ) $$
 
 Where \(\beta\) is the learning rate of the Critic and \(\alpha\) the
 learning rate of the Actor. P-values should not be seen as literal
 Q-values, but instead as preference values.
 
-\hypertarget{qv-learning}{%
-\subsubsection{QV-learning}\label{qv-learning}}
+\subsubsection{QV-learning}\label{qv-learning}
 
-QV-learning (wiering 2008{[}6{]}) is very similar to Actor-Critic. It is
+QV-learning (\cite{wiering2008}{[}6{]}) is very similar to Actor-Critic. It is
 also a learning method that learns a state value-function V with TD
 method, and an Actor function to map the states for each action to
 preference values. However, QV-learning learns actual Q-values as
-preference values (wiering 2008). After each experience
+preference values \cite{wiering2008}. After each experience
 \((s_t, a_t, r_t, s_{t+1})\), the V value-function is updates in the
-same way as in the Actor-Critic method (wiering 2007):
+same way as in the Actor-Critic method \cite{wiering2007}:
 
 \[ V(s_t) := V(s_t) + \beta ( r_t + \gamma V(s_{t+1}) - V(s_t) )   \]
 
 The update for the Q-function is similar to the Actor update, but the
 \(- V(s_t)\) at the end is replaced by \(- Q(s_t, a_t)\):
 
-\[ \text{Qvalue: } Q(s_t, a_t) := Q(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - Q(s_t, a_t))\]
+\[ \textrm{Qvalue: } Q(s_t, a_t) := Q(s_t, a_t) + \alpha ( r_t + \gamma V(s_{t+1}) - Q(s_t, a_t))\]
 
-\hypertarget{acla-actor-critic-learning-automaton}{%
 \subsubsection{ACLA (Actor-Critic Learning
-Automaton)}\label{acla-actor-critic-learning-automaton}}
+Automaton)}\label{acla-actor-critic-learning-automaton}
 
-Actor-Critic Learning Automaton (ACLA)(wiering 2008{[}6{]}) is an
+Actor-Critic Learning Automaton (ACLA)(\cite{wiering2008}{[}6{]}) is an
 on-policy learning algorithm that learns a state value-function V and
 Actor function P. After each experience
 
-wiering 2008 \((s_t, a_t, r_t, s_{t+1})\), the state value-function is
-updated in the same way as Actor-Critic or QV-learning (wiering 2007):
+\cite{wiering2008}\((s_t, a_t, r_t, s_{t+1})\), the state value-function is
+updated in the same way as Actor-Critic or QV-learning \cite{wiering2007}:
 
 \[ \delta_t = r_t + \gamma V(s_{t+1}) - V(s_t) \]
 
 \[ V(s_t) := V(s_t) + \beta ( \delta_t ) \]
 
 The actor function maps states to preferences for actions and is updated
-by an automaton-like updating rule (wiering 2008 {[}20{]}) The policy
+by an automaton-like updating rule (\cite{wiering2008} {[}20{]}) The policy
 mapping update depends on the sign of \(\delta\):
 
 \(\delta_t \geq 0\)
@@ -246,27 +240,24 @@ There are also additional rules to ensure that the target values are
 between 0 and 1 and existing. If \(P(s_t,a)\) is greater than 1, the
 value gets changed to 1. If \(P(s_t,a)\) is smaller than 0, the value
 gets changed to zero. If the denominator is 0, the new value equals
-\(\frac{1}{|A| -1}\), with \(|A|\) being the number of actions (wiering
-2008).
+\(\frac{1}{|A| -1}\), with \(|A|\) being the number of actions \cite{wiering2008}.
 
-\hypertarget{ensemble-algorithms-in-rl}{%
-\subsection{Ensemble algorithms in RL}\label{ensemble-algorithms-in-rl}}
+\subsection{Ensemble algorithms in RL}\label{ensemble-algorithms-in-rl} 
 
 Combining single classifiers for which the errors are not strongly
 correlated can lead to a higher accuracy than what is available for a
 single classifier. With this in mind, ensemble methods have been used in
 reinforcement learning to combine value functions stored by function
-approximators (wiering 2008 {[}14{]}, {[}15{]}, {[}16{]}, {[}17{]}).
+approximators \cite{wiering2008} {[}14{]}, {[}15{]}, {[}16{]}, {[}17{]}).
 However, only Rl algorithms with the same value function can be combined
 in this way. In our case, want to combine RL methods with different
 value function and policies (e.g.~Q-learning and ACLA). It is possible
 however, to combine the different policies that were derived from
 distinct value functions. Next, we will describe four ensemble methods,
-designed by (Wiering 2008), that combine policies and also take into
+designed by \cite{wiering2008}, that combine policies and also take into
 account exploration.
 
-\hypertarget{majority-voting}{%
-\subsubsection{Majority voting}\label{majority-voting}}
+\subsubsection{Majority voting}\label{majority-voting}
 
 Each of the n RL algorithms defines what it thinks to be the best
 action. Majority voting will transform these best actions into
@@ -287,11 +278,9 @@ actions selection:
 \[ \pi_t (s_t, a[i]) = \frac{exp[\frac{p_t(s_t, a[i])}{\tau}]}{\sum_k exp[\frac{p_t(s_t, a[k])}{\tau}]} \]
 
 This policy makes sure that the most probable action is the best action
-according to most algorithms, but also ensures exploration (wiering
-2008).
+according to most algorithms, but also ensures exploration \cite{wiering2008}.
 
-\hypertarget{rank-voting}{%
-\subsubsection{Rank voting}\label{rank-voting}}
+\subsubsection{Rank voting}\label{rank-voting}
 
 Preference values of the ensemble are give by:
 
@@ -301,15 +290,14 @@ If m actions are possible in state \(s_t\), \(r_t^j(a[1])\),
 \(r_t^j(a[2])\), \ldots{} , \(r_t^j(a[m])\) denotes the weights for
 these actions as determined by RL algorithm j. The most probable action
 is weighted m times, the second best m-1 times, and so on\ldots{}
-(wiering 2008). As with majority voting, the rank voting algorithm uses
+\cite{wiering2008}. As with majority voting, the rank voting algorithm uses
 the following Boltzmann distribution based ensemble policy to ensure
 both exploitation and exploration:
 
 \[ \pi_t (s_t, a[i]) = \frac{exp[\frac{p_t(s_t, a[i])}{\tau}]}{\sum_k exp[\frac{p_t(s_t, a[k])}{\tau}]} \]
 
-\hypertarget{boltzmann-multiplication}{%
 \subsubsection{Boltzmann
-multiplication}\label{boltzmann-multiplication}}
+multiplication}\label{boltzmann-multiplication}
 
 Boltzmann multiplication calculates the ensemble preferences by
 multiplying for each action the action-selection probabilities given by
@@ -327,22 +315,20 @@ policy for actions selection is calculated in the following way:
 
 \[ \pi_t (s_t, a[i]) = \frac{ p_t(s_t, a[i])^{\frac{1}{\tau}}}{\sum_k p_t(s_t, a[k])^{\frac{ 1 }{\tau}}} \]
 
-\hypertarget{boltzmann-addition}{%
-\subsubsection{Boltzmann addition}\label{boltzmann-addition}}
+\subsubsection{Boltzmann addition}\label{boltzmann-addition}
 
 The formula of Boltzmann addition looks very similar to Boltzmann
 multiplication, with the product being replaced by a sum:
 
 \[ p_t(s_t, a[i]) = \sum_j \pi_t^j (s_t, a[i]) \]
 
-As concept however, it is a variant of rank voting where \$
-r\_t\^{}j=\pi\_t\^{}j \$. The ensemble policy for actions selection is
+As concept however, it is a variant of rank voting where $
+r_t^{j}=\pi_t^{t} $. The ensemble policy for actions selection is
 calculated in the same way as Boltzmann multiplication:
 
 \[ \pi_t (s_t, a[i]) = \frac{ p_t(s_t, a[i])^{\frac{1}{\tau}}}{\sum_k p_t(s_t, a[k])^{\frac{ 1 }{\tau}}} \]
 
-\hypertarget{experiments}{%
-\subsection{Experiments}\label{experiments}}
+\subsection{Experiments}\label{experiments}
 
 We compared five different RL algorithms (Q-learning, SARSA,
 Actor-Critic, QV-learning, ACLA) with each other and with four ensemble
@@ -371,8 +357,7 @@ in different trials. Such trial starts with the agent in the starting
 position and ends when it reaches the goal positions or has wandered for
 1000 consecutive action without reaching the goal.
 
-\hypertarget{small-maze-experiment}{%
-\subsubsection{Small Maze experiment}\label{small-maze-experiment}}
+\subsubsection{Small Maze experiment}\label{small-maze-experiment}
 
 The first experiment was the least complex, so that the agent could use
 tabular expression for the different state-action pairs. We implemented
@@ -382,11 +367,11 @@ position (Fig. \ref{simpleMaze}).
 
 \begin{figure}
 \centering
-\includegraphics{img/simpleMaze.png}
+\includegraphics[scale=0.5]{img/simpleMaze.png}
 \caption{Sutton's Dyna maze \label{simpleMaze}}
 \end{figure}
 
-In order to compare our results with those of (wiering 2008), we used
+In order to compare our results with those of \cite{wiering2008}, we used
 the same learning rates, discount factors and greediness (inverse of
 Boltzmann temperature) parameters. In their paper, they explain how they
 tested a wide range of parameters to optimize each of the five RL
@@ -394,15 +379,53 @@ algorithms final performance (by evaluating the average reward). They
 wanted to compare the best version of each algorithm, which was not
 possible if the same parameters were used. For the ensemble methods,
 they used the same parameters as were determined for the single RL
-algorithms. (wiering 2008) observed the discount factor to have a major
+algorithms. \cite{wiering2008} observed the discount factor to have a major
 impact on the final and cumulative score. For the SARSA method, discount
 factors 0.90 and 0.95, and for the ACLA method, discount factors 0.99
 and 0.90 were compared to each other. We wanted to confirm these
 findings, so we did simulations with the same discount factors.
 
-\hypertarget{neural-networks-as-universal-function-approximators}{%
+
+\begin{table*}
+\centering
+\begin{tabular}{|l|llllll|}
+\hline
+Method & \(\alpha\) & \(\beta\) & \(\gamma\) & G & Final &
+Cumulative \\ \hline
+Q & 0.2 & - & 0.9 & 1 & 5.20 +/- 0.19 & 89.66 +/- 4.82\\
+SARSA & 0.2 & - & 0.9 & 1 & 5.20 +/- 0.18 & 91.08 +/-
+4.16\\
+AC & 0.1 & 0.2 & 0.95 & 1 & 5.21 +/- 0.20 & 95.12 +/-
+5.96\\
+QV & 0.2 & 0.2 & 0.9 & 1 & 5.21 +/- 0.18 & 92.24 +/- 4.08\\
+ACLA & 0.005 & 0.1 & 0.99 & 9 & 5.18 +/- 0.14 & 85.32 +/-
+3.59\\
+Majority Voting & - & - & - & 1.6 & 5.19 +/- 0.19 & 94.46 +/-
+3.63\\
+Rank Voting & - & - & - & 0.6 & 4.89 +/- 0.29 & 88.80 +/-
+6.74\\
+Boltzmann Mult. & - & - & - & 0.2 & 5.23 +/- 0.15 & 94.00 +/-
+2.99\\
+Boltzmann Add. & - & - & - & 1 & 5.04 +/- 0.32 & 93.18 +/-
+6.97\\ \hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}
+\centering
+\begin{tabular}{|l|llllll|}
+\hline
+Method & \(\alpha\) & \(\beta\) & \(\gamma\) & G & Final &
+Cumulative  \\ \hline
+SARSA & 0.2 & - & 0.95 & 1 & 4.96 +/- 0.90 & 87.04 +/-
+17.08\\
+ACLA & 0.005 & 0.1 & 0.9 & 9 & 4.27 +/- 1.8 & 60.87 +/-
+29.48\\ \hline
+\end{tabular}
+\end{table*}
+
 \subsubsection{Neural networks as universal function
-approximators}\label{neural-networks-as-universal-function-approximators}}
+approximators}\label{neural-networks-as-universal-function-approximators}
 
 Traditionally RL algorithms use tabular expression to represent a
 state-function or action-function. In Q-learning for example, a Q-value
@@ -421,9 +444,8 @@ agent. Weights were updated after each move using gradient descent for
 one iteration. This was done by performing one forward and one backward
 propagation pass.
 
-\hypertarget{partially-observable-maze}{%
 \subsubsection{Partially observable
-maze}\label{partially-observable-maze}}
+maze}\label{partially-observable-maze}
 
 For the partially observable maze experiment, we started from the same
 Sutton's Dyna maze. However in this case, the starting position varies
@@ -457,9 +479,8 @@ with 20 sigmoidal hidden neurons was used as function approximator. As
 input, the network received the believe state as input, a tuple of
 length 54.
 
-\hypertarget{maze-with-dynamic-obstacles}{%
 \subsubsection{Maze with dynamic
-obstacles}\label{maze-with-dynamic-obstacles}}
+obstacles}\label{maze-with-dynamic-obstacles}
 
 For third experiment, 4 to 8 obstacles (walls) were generated at random
 locations at the start of each trial. Start and goal positions were
@@ -473,9 +494,8 @@ tile whether an agent or wall is on it). 54 of them depict the agent
 position (0 or 1 for each tile), and 54 depict the wall positions (0 or
 1 for each tile).
 
-\hypertarget{maze-dynamic-goal-positions}{%
 \subsubsection{Maze dynamic goal
-positions}\label{maze-dynamic-goal-positions}}
+positions}\label{maze-dynamic-goal-positions}
 
 The fourth maze is very similar to the third maze. Instead of dynamic
 obstacles, there is a dynamic goal position. Obstacles and starting
@@ -484,8 +504,7 @@ network with 20 sigmoidal hidden units and a tuple of length 108 as
 input was used as function approximator. This time 54 values represent
 the agent position, and the other 54 values the goal position.
 
-\hypertarget{generalized-maze}{%
-\subsubsection{Generalized maze}\label{generalized-maze}}
+\subsubsection{Generalized maze}\label{generalized-maze}
 
 The last experiment combined the problem of a maze with dynamic
 obstacles and a maze with dynamic goals positions into a generalized
@@ -495,12 +514,20 @@ neural network with 100 sigmoidal hidden units receives 162 (54x3) input
 values, 54 to describe the agent position, 54 to describe the obstacle
 positions, and 54 to describe the goal position.
 
+\begin{figure*}
+\centering
+\includegraphics[scale=0.35]{img/Timestep_vs_Total_reward_simple.png}
+\caption{Figure 2}
+\end{figure*}
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+\begin{figure*}
+\centering
+\includegraphics[scale=0.35]{img/Timestep_vs_Total_reward.png}
+\caption{Figure 3}
+\end{figure*}
 
-\hypertarget{simple-maze}{%
-\subsection{Simple Maze}\label{simple-maze}}
+\section{Results}\label{results}
+\subsection{Simple Maze}\label{simple-maze}
 
 The evaluation was done by noting the Final Reward intake during the
 last 2500 learning-steps of each simulation. Also the cumulative average
@@ -508,53 +535,13 @@ reward was calculated after every 2500 learning-steps. Each simulation
 has 50,000 learning-steps. Table 1 shows the average results and the
 standard deviation of 500 such simulations.
 
-\begin{longtable}[]{@{}lllllll@{}}
-\toprule
-Method & \(\alpha\) & \(\beta\) & \(\gamma\) & G & Final &
-Cumulative\tabularnewline
-\midrule
-\endhead
-Q & 0.2 & - & 0.9 & 1 & 5.20 +/- 0.19 & 89.66 +/- 4.82\tabularnewline
-SARSA & 0.2 & - & 0.9 & 1 & 5.20 +/- 0.18 & 91.08 +/-
-4.16\tabularnewline
-AC & 0.1 & 0.2 & 0.95 & 1 & 5.21 +/- 0.20 & 95.12 +/-
-5.96\tabularnewline
-QV & 0.2 & 0.2 & 0.9 & 1 & 5.21 +/- 0.18 & 92.24 +/- 4.08\tabularnewline
-ACLA & 0.005 & 0.1 & 0.99 & 9 & 5.18 +/- 0.14 & 85.32 +/-
-3.59\tabularnewline
-Majority Voting & - & - & - & 1.6 & 5.19 +/- 0.19 & 94.46 +/-
-3.63\tabularnewline
-Rank Voting & - & - & - & 0.6 & 4.89 +/- 0.29 & 88.80 +/-
-6.74\tabularnewline
-Boltzmann Mult. & - & - & - & 0.2 & 5.23 +/- 0.15 & 94.00 +/-
-2.99\tabularnewline
-Boltzmann Add. & - & - & - & 1 & 5.04 +/- 0.32 & 93.18 +/-
-6.97\tabularnewline
-\bottomrule
-\end{longtable}
-
-
- It was observed that Majority voting and Boltzmann Multiplication have
+It was observed that Majority voting and Boltzmann Multiplication have
 the best Final as well as the Cumulative reward intakes. In the current
 experiment, Boltzmann addition has the worst performance.
 
 In order to examine the effect of the discount factor (\(\gamma\)) , the
 SARSA and the ACLA algorithms are rerun with different discount factors.
 The results are shown in table 2.
-
-\begin{longtable}[]{@{}lllllll@{}}
-\toprule
-Method & \(\alpha\) & \(\beta\) & \(\gamma\) & G & Final &
-Cumulative\tabularnewline
-\midrule
-\endhead
-SARSA & 0.2 & - & 0.95 & 1 & 4.96 +/- 0.90 & 87.04 +/-
-17.08\tabularnewline
-ACLA & 0.005 & 0.1 & 0.9 & 9 & 4.27 +/- 1.8 & 60.87 +/-
-29.48\tabularnewline
-\bottomrule
-\end{longtable}
-
 
  There is a significant drop in the performance of both algorithms as
 compared to the previous simulations.
@@ -563,28 +550,18 @@ Figure 1 and 2 plots the total reward obtained by the algorithms vs the
 timestep. For the sake of clarity results are plotted till 15,000
 timesteps. It can be observed that all algorithms converge to a stable
 performance well within 15,000.
-\includegraphics{img/Timestep_vs_Total_reward_simple.png}
-\includegraphics{img/Timestep_vs_Total_reward_zoomed_simple.png}
 
-\hypertarget{maze-with-dynamic-obstacles-1}{%
 \subsection{Maze with dynamic
-obstacles}\label{maze-with-dynamic-obstacles-1}}
+obstacles}\label{maze-with-dynamic-obstacles-1}
 
 Figure 3 plots the total reward over time steps for a Maze with Dynamic
 obstacles. None of the algorithms successfully converge to stable
 values. Consequently the final and the cumulative rewards are negative,
 which is far below that of simple maze.
 
-\begin{figure}
-\centering
-\includegraphics{img/Timestep_vs_Total_reward.png}
-\caption{Figure\_3}
-\end{figure}
+\section{Discussion}\label{discussion}
 
-\hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
-
-Although the article of (wiering 2008) is very interesting and shows new
+Although the article of \cite{wiering2008} is very interesting and shows new
 insights, we are of the opinion that they could have taken extra steps
 to assure reproducibility. Some methods were ambiguously explained, so
 that it took some effort to figure out what was meant exactly. The
@@ -606,10 +583,18 @@ For the small maze experiment, we observed very similar results to those
 in the paper. All final and cumulative values were within the standard
 deviation.
 
-(Wiering 2008) determined all learning parameters by performing various
+\cite{wiering2008} determined all learning parameters by performing various
 trials with different parameter values. They noted in their paper that
 the discount factor had a major effect on the performance. To assess
 this effect, the SARSA and the ACLA algorithms were trained on the
 simple maze with changed discount. We observe a significant change in
 the final and the cumulative reward, which highlights the importance of
 this parameter in the overall performance of the algorithms.
+
+\footnotesize
+\bibliographystyle{apalike}
+\bibliography{sources}
+
+
+\end{document}
+
