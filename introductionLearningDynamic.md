@@ -34,6 +34,16 @@ The program was given no domain knowledge except the rules and achieved a superh
  
      - explain basic ones (Q-learning, SARSA, Actor-Critic)
         + Find some good sources
+Some well known online model-free value-function based reinforcement algorithms are SARSA and Q-learning.
+They are both temporal difference (TD) reinforcement learning algorithm that learn by updating a Q-function (action value function).
+The difference is that Q-learning is off-policy.
+This means that the optimal action-value function is learned independent of the policy that is being followed,
+unlike on-policy methods like SARSA, the learning of the action-value does depend on the policy.
+The Actor-Critic (AC) is an temporal difference, on-policy learning algorithm.
+But where SARSA and Q-learning only keep track of a single Q-function,
+AC makes the distinction between a critic value function V that only depends on the state,
+and an Actor function which will map for each action the states to preference values.
+           
     - explain advanced onces with paper backing (QV-learning,ACLA)
 <!---
 
