@@ -72,56 +72,19 @@ Ensemble methods are a powerful method to combine different Reinforcement Learni
 which often result in improved learning speed and final performance.
 
     - How they did it in other papers
-<!---
+[1] used ensemble methods to combine multiple reinforcement learning algorithms for multiple agents for which they used Temporal-Difference(TD) and  Residual-Gradient(RG) update methods as well as a policy function.
+Other ensemble methods have been used in reinforcement learning to combine value functions stored by function approximators (wiering 2008 [14], [15], [16], [17]).
+However, only Rl algorithms with the same value function can be combined in this way.
+(Wiering2008) wanted to combine RL methods with different value functions and policies (e.g. Q-learning and ACLA).
+It is possible however, 
+to combine the different policies that were derived from distinct value functions.
+Some algorithms that perform this task and take exploration into account at the same time are Majority voting, Rank voting, Boltzmann multiplication, and Boltzmann addition.
+Majority Voting (VM) combines the best action of the RL algorithms and bases the final decision on the number of times that each action was preferred by the different RL methods.
+Rank Voting (RV) lets each algorithm rank the different actions and combines these rankings into ﬁnal preferences over actions.
+Boltzmann mulplication(BM) multiplies the Boltzmann probabilities
+of each action computed by each RL algorithm.
+Finally, Boltzmann Addition(BA) is very similar to Boltzmann mulplication, but adds instead of multiplies the Boltzmann probabilities of actions.
 
-paper on ensemble methods multi agents function approximation
-						
-In another paper such as  Ensemble Methods for Reinforcement Learning with Function Approximation[1], 
-ensemble methods have been combined with Reinforcement Learning (RL) algorithsms.
-In this paper ideas are the same like the  work that we have  elaborated with. 
-The only difference that it do not have the same method as our. 
-Also In this paper they describe several ensemble methods that 
-combine multiple reinforcement learning algorithms for multiple agents.
-For that the Temporal-Difference(TD) and  Residual-Gradient(RG) update methods 
-as well as a policy function have been used . 
-These two methods must be combined to the policy function 
-and have been be applied to the simple pencil-and-paper game (Tic-Tac-Toe ). 
-They showed that an ensemble of three agents outperforms a single agent. 
-Furthermore, they performed an experiment to learn the shortest path on  a 20×20 maze.
-The purpose of applying ensemble methods on games is to show that the learning speed is faster 
-and from that they concluded or observed an increase in learning speed. 
-
---->  
-
-<!--- 
-
-Function approximation with neural networks
-
-Stefan Fauber and Friedhelm Schwenker, in Neural Network Ensembles in Reinforcement Learning[3], 
-propose a meta-algorithm to learn state-action values in a Neural Network Ensemble, fromed multi agent. 
-The algorithm is evaluate on a generalized maze problem and on SZ-Tetris.
-And  the  evaluations methods, like Temporal-Difference or SARSA, 
-produce good results for problems where theYeah keep workin Markov property holds contrary 
-to the methods based ona temporal-difference.
-
----> 
-    - How we do it differently (Concept behind it)
-        + find some good source material
-    - Which algorithms used
-<!---
-
-Ensemble methods used in our paper
-
-Majority Voting (VM), this one combine the best action of each algorithm and  its ﬁnal decision is based on
-the number of times that an action is preferred by each algorithm. 
-Rank Voting (RV), this another one lets each algorithm rank the different actions and combines these rankings to 
-select a ﬁnal action.
-Boltzmann mulplication(BM), uses Boltzmann exploration for each algorithm and multiplies the Boltzmann probabilities
-of each action computed by each algorithm.
-and Boltzmann Addition(BA), this one is similar to Boltzmann mulplication(BM) but instead to multiplie it adds the
-Boltzmann probabilities of actions.
-
---->
  * Work they did in our paper / transition to methods   
 <!---
 
