@@ -39,9 +39,9 @@ Boltzmann Add.                        & \multicolumn{1}{c|}{-} & -              
 
 
 <br>
-It was observed that Majority voting and Boltzmaann Multiplication have the best Final as well as the Cumulative reward intake. In the current experiment, Boltzmann addition has the worst performance. 
+It was observed that Majority voting and Boltzmann Multiplication have the best Final as well as the Cumulative reward intakes. In the current experiment, Boltzmann addition has the worst performance. 
 
-In order to examine the effect of hte discount factor ($\gamma$) , the SARSA and the ACLA algorithms are rerun with different discount factors. The results are shown in table 2.
+In order to examine the effect of the discount factor ($\gamma$) , the SARSA and the ACLA algorithms are rerun with different discount factors. The results are shown in table 2.
 <br>
 
 | Method | $\alpha$ | $\beta$ | $\gamma$ | G | Final         | Cumulative      |
@@ -63,7 +63,7 @@ ACLA   & 0.005    & 0.1     & 0.9      & 9 & 4.27 +/- 1.8  & 60.87 +/- 29.48 \\ 
 <br>
 There is a significant drop in the performance of both algorithms as compared to the previous simulations. 
 
-Figure 1 and 2 plots the total reward obtained by the algorithms vs the timestep. For the sake of clarity results are plotted till 15,000 timesteps. It can be observed that all algorithms converge to a stable performance within 15,000. From this comparision it can also be seen that the convergence of ACLA is the slowest.
+Figure 1 and 2 plots the total reward obtained by the algorithms vs the timestep. For the sake of clarity results are plotted till 15,000 timesteps. It can be observed that all algorithms converge to a stable performance well within 15,000.
 ![Figure_1](img/Timestep_vs_Total_reward_simple.png)
 ![Figure_2](img/Timestep_vs_Total_reward_zoomed_simple.png)
 
@@ -71,6 +71,8 @@ Figure 1 and 2 plots the total reward obtained by the algorithms vs the timestep
 
 ## Maze with dynamic obstacles
 
-Figure 3 plots the total reward over timesteps for a Maze with Dynamic obstacles. 
+Figure 3 and 4 plots the total reward over timesteps for a Maze with Dynamic obstacles. None of the algoorthms successfully converge to stable values. Consequently the final and the cumulative rewards are negative, which is far below that of simple maze.
 
-<br>
+![Figure_3](img/Timestep_vs_Total_reward.png)
+![Figure_4](img/Timestep_vs_Total_reward_zoomed.png)
+
