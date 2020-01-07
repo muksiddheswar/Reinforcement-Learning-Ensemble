@@ -68,23 +68,9 @@ interact with each other in the real world.
 --->
 
 * Ensemble methods
-<!--- 
+Ensemble methods are a powerful method to combine different Reinforcement Learning (RL) algorithms, 
+which often result in improved learning speed and final performance.
 
-Transition to ENSEMBLE methods
-
-Ensemble methods are often combined with Reinforcement Learning (RL) algorithms to have a good return. 
-And it is in this logic that we have chosen to work on the one paper name " Ensemble Algorithms in Reinforcement Learning".
-
---->
-
-<!---
-
-What are ensemble methods and benefits
-
-Ensemble methods are very powerful and appropriate in the sense that when combined with Reinforcement Learning (RL) algorithms, 
-they perform learning speed and final performance  when applied for solving different control problems.
-
---->
     - How they did it in other papers
 <!---
 
