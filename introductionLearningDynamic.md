@@ -34,7 +34,7 @@ The program was given no domain knowledge except the rules and achieved a superh
  
      - explain basic ones (Q-learning, SARSA, Actor-Critic)
         + Find some good sources
-Some well known online model-free value-function based reinforcement algorithms are SARSA and Q-learning.
+Some basic, well known online model-free value-function based reinforcement algorithms are SARSA and Q-learning.
 They are both temporal difference (TD) reinforcement learning algorithm that learn by updating a Q-function (action value function).
 The difference is that Q-learning is off-policy.
 This means that the optimal action-value function is learned independent of the policy that is being followed,
@@ -45,35 +45,14 @@ AC makes the distinction between a critic value function V that only depends on 
 and an Actor function which will map for each action the states to preference values.
            
     - explain advanced onces with paper backing (QV-learning,ACLA)
-<!---
+wiering(2007) explains a more recent and advanced on-policy QV-learning method. 
+This algorithm can be seen as mix between Actor-Critic and Q-learning.
+As Actor-Critc, it learn the state-value function V and an action-value function.
+But unlike Actor-Critic, it learns the Q-function for that.
+ACLA is another on-policy RL algorithm derived from Actor-Critic
+that learns a state value-function V and Actor function P.
+QV-learning and ACLA have been shown to outperform similar, more basic, RL algorithms (wiering2007) and QV-learning even scores higher in certain problem contexts than more recent RL methods (wiering2009).
 
-Paper about more advanced reinforcement algorithms
-
-Further another paper namely: The QV Family Compared to Other Reinforcement Learning Algorithms[2]
-do not combine Methodes and Reinforcement Learning (RL) algorithsms.
-This paper compare new Reinforcement Learning (RL) algorithsms such as QV2 with others Reinforcement Learning (RL) algorithsms 
-well known as: Q-Learning, Sarsa, Actor-Critic(AC), QV-Learning,  Actor-Critic.
-These comparaison are made on  different maze tasks and the aim is to know whether there exit 
-a large difference in term of performance between algorithms when they are applied to a problem And also to know if 
-an algorithm perform better than others. 
-
---->
-    
-<!---
-
-Paper about more advanced reinforcement algorithms
-
-Marco A. Wiering and Hado van Hasselt, in Two Novel On-policy Reinforcement Learning Algorithms based on TD( λ )-methods[4], 
-describes two novel Reinforcement learning (RL) algorithms namely: QV(λ)-learning and Actor Critic learning automaton (ACLA). 
-both algorith use TD(λ)-methods to learn state value-function. 
-but the difference between them is that QV-learning uses the Q-learning to learn Q-values 
-and  use learning automaton to update actor.
-These methods revel several possible advantage compared to other reinforcement learning algorithms such as Q-learning, 
-Sarsa, and conventional Actor-Critic methods.
-Experiments are performed on dynamic maze problems and results 
-show that the two novel algorithms can outperform previously known reinforcement learning algorithms
-
---->
     - shortcomings
 <!---
 
