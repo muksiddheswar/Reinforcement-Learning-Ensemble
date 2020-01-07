@@ -64,6 +64,9 @@ ACLA   & 0.005    & 0.1     & 0.9      & 9 & 4.27 +/- 1.8  & 60.87 +/- 29.48 \\ 
 There is a significant drop in the performance of both algorithms as compared to the previous simulations. 
 
 Figure 1 and 2 plots the total reward obtained by the algorithms vs the timestep. For the sake of clarity results are plotted till 15,000 timesteps. It can be observed that all algorithms converge to a stable performance within 15,000. From this comparision it can also be seen that the convergence of ACLA is the slowest.
+![Figure_1](img/Timestep_vs_Total_reward_simple.png)
+![Figure_2](img/Timestep_vs_Total_reward_zoomed_simple.png)
+
 <br>
 
 ## Maze with dynamic obstacles
