@@ -2,24 +2,18 @@
 
 * What is Reinforcement learning
     - how does it work in general
-<!---
 
-WHAT IS RL (GENERAL)
+Reinforcement learning is a branch of machine learning
+in which software agents learn from interacting with their environment.
+It is a very general framework that can be used to learn tasks of a sequential decision making nature.
+An environment can exists as different states,
+and the actions available to the agent depend on the state of this environment.
+After every action, the agent receives a reward which might be positive or negative.
+Through iterative experience, the agent seeks a policy, 
+an idea about which action needs to be performed for every possible state of the environment,
+that maximizes the sum of rewards over time.
 
-Reinforcement Learning (RL) is an area of machine learning. 
-Software agents need to learn from experience which actions to take in an environment to maximize cumulative reward.
-The interactions and decisions the agent takes depend on the state of the environment.	
-               
----> 
 
-<!--
-
-How does RL work (very general)
-
-In return the environment provides to the agent a reward which might be positve or negative. 
-The agent seeks, through iterative experiences the optimal solution by  maximizes the sum of rewards over time.
-
---->
     - function approximation for more complex tasks
         + Find some good source
     - some fancy real live applications
@@ -27,9 +21,6 @@ The agent seeks, through iterative experiences the optimal solution by  maximize
 
 kick ass real live applications
 
-Reinforcement Learning (RL) is defined as a Machine Learning method. 
-It is a very general framework for learning sequential decision making tasks.
-It has the particularity that it is used when we want to repeat iteratively action to learn. 
 it is example in learning Robot and  Alpha Go where 
 reinforcement Learning is use to reach the goal. 
 Therefore, Machine Learning (ML) are use to perform a specific task without using 
