@@ -30,7 +30,14 @@ or maybe they used action replay as in "Human-level control through deep reinfor
         + gamma 
 
 <br>
-The SARSA and the ACLA algorithms were experimented with changed discount factor shows a significant change in the final and the cumulative reward which highlights the importance of this parameter in the overall performace of the algorithms. All other learning parameters being used were best found from multiple trials [wiering 2008] .
+
+(Wiering 2008) determined all learning parameters by performing various trials with different parameter values.
+They noted in their paper that the discount factor had a major effect on the performance.
+To assess this effect,
+the SARSA and the ACLA algorithms were trained on the simple maze with changed discount.
+We observe a significant change in the final and the cumulative reward,
+which highlights the importance of this parameter in the overall performance of the algorithms. 
+
 
 Due to lack of computational power and time, this observation was generated for 1 simulation only. As a result small differences in performance of the algorithms were not clearly distinguishable. Hence it was not possible to compare the convergence of the algorithms other than identify the slowest.
 
