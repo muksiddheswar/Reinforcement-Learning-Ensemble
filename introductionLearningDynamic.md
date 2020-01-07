@@ -54,8 +54,9 @@ that learns a state value-function V and Actor function P.
 QV-learning and ACLA have been shown to outperform similar, more basic, RL algorithms (wiering2007) and QV-learning even scores higher in certain problem contexts than more recent RL methods (wiering2009).
 
     - shortcomings
-<!---
+Reinforcement learning methods, however useful, can take many steps to learn.
 
+<!---
 shortcomings
 
 Although the Reinforcement Learning (RL) is very used to solve problems it also has shutcomings. 
@@ -64,8 +65,8 @@ complicated in many different ways and therefore a typical Reinforcement Learnin
 For example, the state space is very large in the game of Alpha GO,
 environment cannot be fully observed in Poker game and there are lots of agents 
 interact with each other in the real world.
-
 --->
+
 * Ensemble methods
 <!--- 
 
