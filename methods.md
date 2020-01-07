@@ -719,9 +719,6 @@ a Q-value is remembered for each state-action combination.
 Each time the agent performs an action, gains experience, 
 the Q-value of that specific state-action pair is updated.
 For complex games however, there is an explosion of state-action possibilities.
-Chess for example, is estimated to have more than $10^{50}$ chess-board configurations.
-Not only do we lack the memory to store such a table,
-we would need more time than the age of the universe to explore all possible states.
 Therefore function approximators are used to approximate such state(-action) functions,
 which try to capture the essence, most essential concepts in order to maximize reward.
 Neural networks are universal function approximators, 

@@ -16,6 +16,18 @@ that maximizes the sum of rewards over time.
 
     - function approximation for more complex tasks
         + Find some good source
+
+For simple tasks,
+the agent can use a tabular expression to remember values associated with certain states or state-action combinations,
+also called state(-action) functions.
+For complex games however, there is an explosion of state-action possibilities.
+Chess for example, is estimated to have more than $10^{50}$ chess-board configurations.
+Not only do we lack the memory to store such a table,
+we would need more time than the age of the universe to explore all possible states.
+Therefore function approximators are used to approximate such state(-action) functions.
+The capture the most essential concepts in order to maximize reward.
+Neural networks are an example of such function approximator.
+
     - some fancy real live applications
 <!---
 
