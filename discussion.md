@@ -13,13 +13,13 @@ they used multiple gradient descent iterations after each move.
 Or maybe, action replay as in, "Human-level control through deep reinforcement learning",
 from DeepMind where used. 
 Here, actions, states and rewards are stored in memory and every so often, the weights are updated by learning from the experiences stored in memory.
-This could be one of the reason why our neural networks were not able to converge,
+This could be one of the reason why our neural networks were not able to converge for the dynamic maze and other more complex maze experiments,
 while in the original paper, they did.
 Other possible explanation are numerical errors. 
 
-* Small maze
-    - Very similar results
-        + within standard deviation
+For the small maze experiment,
+we observed very similar results to those in the paper.
+All final and cumulative values were within the standard deviation.
 
 (Wiering 2008) determined all learning parameters by performing various trials with different parameter values.
 They noted in their paper that the discount factor had a major effect on the performance.
@@ -27,6 +27,3 @@ To assess this effect,
 the SARSA and the ACLA algorithms were trained on the simple maze with changed discount.
 We observe a significant change in the final and the cumulative reward,
 which highlights the importance of this parameter in the overall performance of the algorithms. 
-
-
-For the Dynamic Maze, the results  were inconclusive. The reason behind this can be attrbuted the
