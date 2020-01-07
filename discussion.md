@@ -1,5 +1,20 @@
 # Discussion
 
+Although the article of (wiering 2008) is very interesting and shows new insights,
+we are of the opinion that they could have taken extra steps to assure reproducibility.
+Some methods were ambiguously explained, so that it took some effort to figure out what was meant exactly.
+The source was also not available, which would have solved previous remark.
+For example,
+while implementing the neural network,
+it is not clear how the weights are updates.
+We decided to update the weights after each move gradient descent for one iteration.
+However, it is possible that in the original paper,
+they used multiple gradient descent iterations after each move.
+Or maybe, action replay as in, "Human-level control through deep reinforcement learning",
+from DeepMind where used. 
+Here, actions, states and rewards are stored in memory and every so often, the weights are updated by learning from the experiences stored in memory.
+
+
 * There was still some ambiguity in the article that could have been explained better
     - source code was not available (or we did not find it at least)
     - stuff they did not explain about the neural network that was needed for the implementation
@@ -15,13 +30,8 @@
     - numerical errors
     - normal multiple iteration before the forward and backward propagation
     - something with experience replay
-
-EXPLANATION    
-for the lack of clarity for the NN: what we did: Weights were updated after each move using gradient descent for one iteration
-They were not explicit on how the weight were updates in the neuro net so we assumed what IU just said in the previous message
-However they could also have applied multiple gradient descent iterations after each move
-or maybe they used action replay as in "Human-level control through deep reinforcement learning" from DeepMind where actions, states and rewards are stored in memory and every so often, the weights are updated by learning from the experiences stored in memory
     
+
 * Small maze
     - Very similar results
         + within standard deviation
@@ -29,7 +39,10 @@ or maybe they used action replay as in "Human-level control through deep reinfor
     - variation of parameters
         + gamma 
 
-<br>
+
+
+
+
 
 (Wiering 2008) determined all learning parameters by performing various trials with different parameter values.
 They noted in their paper that the discount factor had a major effect on the performance.
@@ -39,6 +52,13 @@ We observe a significant change in the final and the cumulative reward,
 which highlights the importance of this parameter in the overall performance of the algorithms. 
 
 
+
+
+
 Due to lack of computational power and time, this observation was generated for 1 simulation only. As a result small differences in performance of the algorithms were not clearly distinguishable. Hence it was not possible to compare the convergence of the algorithms other than identify the slowest.
+
+
+
+
 
 For the Dynamic Maze, the results  were inconclusive. The reason behind this can be attrbuted the
