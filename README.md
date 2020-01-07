@@ -16,3 +16,6 @@ therefore a neural network was used for value functions approximation.
 We reimplemented their algorithms and obtained the same results for the first maze. 
 For the other mazes, our neural network did not converge. 
 Possible causes for this non-convergence are discussed in this article.
+
+* * *
+This branch contains the latest updated code, results and articles describing the findings.
