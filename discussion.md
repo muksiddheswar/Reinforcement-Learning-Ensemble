@@ -28,3 +28,10 @@ or maybe they used action replay as in "Human-level control through deep reinfor
     - we can tell something about the rank voting that there is still a minor bug that could have influence
     - variation of parameters
         + gamma 
+
+<br>
+The SARSA and the ACLA algorithms were experimented with changed discount factor shows a significant change in the final and the cumulative reward which highlights the importance of this parameter in the overall performace of the algorithms. All other learning parameters being used were best found from multiple trials [wiering 2008] .
+
+Due to lack of computational power and time, this observation was generated for 1 simulation only. As a result small differences in performance of the algorithms were not clearly distinguishable. Hence it was not possible to compare the convergence of the algorithms other than identify the slowest.
+
+For the Dynamic Maze, the results  were inconclusive. The reason behind this can be attrbuted the
