@@ -1,0 +1,15 @@
+1) the introduction explains clearly the content of the paper
+2) whether there is sufficient background information to understand the relevance of the work
+3) whether the methods are clearly explained (can the results be reproduced?)
+4) whether the results answer the questions asked in the paper.
+5) whether all questions are answered
+6) whether the conclusion is sufficient
+7) and whether the overall style is ok
+8) whether you believe things are missing in the discussion.
+
+
+Also
+1) 3 positive points concerning the work, clearly specifying why you think they are well-done or interesting
+2) 3 negative points, which may include missing/unclear explanations or suggestions for improvement
+3) at least 3 clear and relevant questions on the content or the methods used which can be asked (next to other questions).
+

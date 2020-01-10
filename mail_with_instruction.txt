@@ -1,0 +1,62 @@
+Dear students,
+
+Some information concerning the exam for the ULB-VUB course Learning Dynamics/Computational Game Theory on the 16th and 17th of January 2020. Please inform your group members if they are not included in this email.
+
+The schedule will become available on this website; http://www.ulb.ac.be/di/map/tlenaert/Home_Tom_Lenaerts/Exam_schedule.html
+
+The exam is divided into two days and each day in two parts this year.  The first part is organised between 9:30 - 11:30 followed by a 1.5 hour break.   The second part is between 12:30 and 14:30. All group members have to be present during their session, meaning that if your group has present their work in the first part then you have to be present from 9:30 to 11:30 for the exam. The same applies for the other parts. Make sure you arrive 10 minutes before the exam so we can start in time. If you're not on time you're excluded from the exam!
+
+If you want to change slot then first find a group that is willing to change with you !
+
+ARTICLE PRESENTATION
+
+During the exam you will have 20 minutes to present your article (provide context, explain methods and discuss most relevant results and conclusions). You are required to use slides (limit the number of slides to 15, no more no less) for your presentation.  You have to send the PDF version of the slides to us  the day before the exam (tlenaert@ulb.ac.be). Note also that we expect that every member of the group participates in the presentation, meaning that everyone has to present something. As you attended the seminar by Prof. Grujic on how to present your project, we are expecting excellent presentations!
+
+After your presentation there will be 10 minutes for  questions, both by the reviewing group and by us.  Make sure that everyone of your group tries to answer at least one of the questions.  We will check whether every group member contributes sufficiently to the entire process!  Before the exam (on the 13th or 14th) you will also receive the review of your work performed by another group in your session. You can use this to improve your presentation and anticipate questions.
+
+When preparing the presentation take into account that not all people in the room will have read your paper. Thus esnure a proper introduction to your work. Below information on the other criteria we use to evaluate your presentation.
+Evaluation Criteria presentation:
+1. How well you introduce the problem and state-of-the art (problem definition, hypothesis, state-of-the-art, context)
+2. The overall quality of the presentation (pedagogic quality, definition of terminology, use of examples, manner and clarity of presentation)
+3. Efficiency of the presentation (Stay within the 20 minutes, rehearsed or not, slide organisation and structure).
+4. Your critical assessment of the article (It does mean that when something is published that it is also good or that the information in the article is sufficient to reproduce the work)
+5. Association with the course (Whether and how you draw links to information you obtained in the theoretical sessions of the course, where you go beyond the course).
+6. Use of review (Was the review used in improving the presentation, clarifying things, anticipate questions/critiques)
+5. Quality of response (The ease of response to the questions, provide additional slides to answer questions from the review, do all participants answer questions)
+
+REVIEWING OF OTHER ARTICLE
+
+Please find also in attachment the paper of your colleagues that your group has to review (let us know if it is missing from the attachments). The deadline for this review is Monday the 13th of January (noon).  Send the PDF of your review document to tlenaert@ulb.ac.be.
+
+For this reviewing process you will need to read the article of your colleagues and prepare an evaluation with questions concerning the things you read in this work.
+
+In general you need to evaluate whether
+1) the introduction explains clearly the content of the paper
+2) whether there is sufficient background information to understand the relevance of the work
+3) whether the methods are clearly explained (can the results be reproduced?)
+4) whether the results answer the questions asked in the paper.
+5) whether all questions are answered
+6) whether the conclusion is sufficient
+7) and whether the overall style is ok and
+8) whether you believe things are missing in the discussion.
+9) etc.
+
+We also expect that you add to this review:
+1) 3 positive points concerning the work, clearly specifying why you think they are well-done or interesting
+2) 3 negative points, which may include missing/unclear explanations or suggestions for improvement
+3) at least 3 clear and relevant questions on the content or the methods used which can be asked (next to other questions).
+
+Also  we ask that every member of your group makes an effort to ask a question after the presentation.
+
+If you have any further questions concerning the organisation do not hesitate to contact us.
+
+Kind regards
+
+The LD/CGT team
+
+—
+
+Tom Lenaerts
+http://tomlenaerts.be/
+
+---
