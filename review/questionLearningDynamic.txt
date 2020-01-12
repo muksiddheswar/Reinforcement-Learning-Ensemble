@@ -1,0 +1,23 @@
+
+In this paper author talk about his work based on his paper chooses.
+
+Introduction is very well wrote 
+ 
+		but the following  expression in introduction need to be explicit.
+		
+" The analysis indicate that the ”wait and see” strategy will only be favourable"
+	
+	question : Can you explain in what consiste ”wait and see” strategy ?
+	
+	question: what  efforts are needed to reduce detrimental fair in future ?
+	
+	
+" Because of these reasons a new model was devised " what model ? ( name and other )
+
+
+In the document methods are very well describe, it do a link between the
+paper and some class part to be more clear in the explaination.
+
+
+question : since the game is like a play where player invest and get return 
+what would be situation if player invest each round all his wealth hoping get more  return ?
