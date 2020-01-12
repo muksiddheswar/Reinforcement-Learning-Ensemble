@@ -7,3 +7,11 @@ Maybe adding more rounds and more players could change the results and be more s
 ## 2
 for the extension, wouldn't it be more relevant to add some risk for investment? 
 Otherwise players could invest all their leftover money at each round since they know they will get back at the next round with some additional profit.
+
+### 3 
+Which risk curve do you expect to be closest to the reality, what are the consequences of this?
+
+
+### 4
+Why do you think that the agent converge toward a situation that prioritizes the risk before investment?
+Could you change the parameters of the model in a way that would result in the agent converging toward self interest? 
