@@ -40,9 +40,9 @@ and helped to clear out any remaining ambiguity.
 This is a professionally written report where the authors reproduced the results of their selected paper and also added a relevant extension to their work.
 As minor remark, we want to note that is would have been better 
 to move the explanation about risk curves to the methods part as it is rather a method than a result.
+Also a more elaborate definition of "wait and see".
 Very nice figures. 
 All questions that were asked in the introduction were answered and most of them were explained clearly.
-
 
 # 6) whether the conclusion is sufficient
 # 8) whether you believe things are missing in the discussion.
@@ -106,5 +106,6 @@ Which risk curve do you expect to be closest to the reality, what are the conseq
 ### 4
 Why do you think that the agent converge toward a situation that prioritizes the risk before investment?
 Could you change the parameters of the model in a way that would result in the agent converging toward self interest? 
-
+Why does the extreme case where each players invests all of their money in each round not occur?
+Would that not give more return?
 
