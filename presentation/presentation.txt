@@ -1,0 +1,19 @@
+* 20 minutes (+ 10 min questions)
+* 15 slides
+* Everyone of the groups needs to answer question
+
+Structure
+	- intro
+	- methods
+	- Results
+	- Conclusion
+
+
+# CRITERIA PRESENTATION
+1. How well you introduce the problem and state-of-the art (problem definition, hypothesis, state-of-the-art, context)
+2. The overall quality of the presentation (pedagogic quality, definition of terminology, use of examples, manner and clarity of presentation)
+3. Efficiency of the presentation (Stay within the 20 minutes, rehearsed or not, slide organisation and structure).
+4. Your critical assessment of the article (It does mean that when something is published that it is also good or that the information in the article is sufficient to reproduce the work)
+5. Association with the course (Whether and how you draw links to information you obtained in the theoretical sessions of the course, where you go beyond the course).
+6. Use of review (Was the review used in improving the presentation, clarifying things, anticipate questions/critiques)
+7. Quality of response (The ease of response to the questions, provide additional slides to answer questions from the review, do all participants answer questions)
