@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This article presents the work of Wiering and van Hasselt in "Ensemble Algorithms in Reinforcement Learning" [reference]. 
+This article presents the work of Wiering and van Hasselt in "Ensemble Algorithms in Reinforcement Learning". 
 Ensemble methods merge multiple reinforcement learning (RL) algorithms into a single agent 
 with the objectif of increasing the learning speed and the obtained reward. 
 While ensemble methods have already been used in the context of reinforcement learning for representing 
